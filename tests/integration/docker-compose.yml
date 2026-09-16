@@ -1,0 +1,59 @@
+# SPDX-License-Identifier: MIT
+
+name: havremote-integration
+
+services:
+  ftp:
+    build:
+      context: .
+      dockerfile: ftp/Dockerfile
+    environment:
+      HAVREMOTE_USER: havremote
+      HAVREMOTE_PASSWORD: havremote-test-password
+      HAVREMOTE_TLS: "0"
+      HAVREMOTE_PASSIVE_MIN: "30000"
+      HAVREMOTE_PASSIVE_MAX: "30009"
+      HAVREMOTE_ADVERTISE: 127.0.0.1
+    ports:
+      - "127.0.0.1:2121:21"
+      - "127.0.0.1:30000-30009:30000-30009"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import socket; socket.create_connection(('127.0.0.1', 21), 2).close()"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    init: true
+
+  ftps:
+    build:
+      context: .
+      dockerfile: ftp/Dockerfile
+    environment:
+      HAVREMOTE_USER: havremote
+      HAVREMOTE_PASSWORD: havremote-test-password
+      HAVREMOTE_TLS: "1"
+      HAVREMOTE_PASSIVE_MIN: "30100"
+      HAVREMOTE_PASSIVE_MAX: "30109"
+      HAVREMOTE_ADVERTISE: 127.0.0.1
+    ports:
+      - "127.0.0.1:2122:21"
+      - "127.0.0.1:30100-30109:30100-30109"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import socket; socket.create_connection(('127.0.0.1', 21), 2).close()"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    init: true
+
+  sftp:
+    build:
+      context: .
+      dockerfile: sftp/Dockerfile
+    ports:
+      - "127.0.0.1:2222:22"
+    healthcheck:
+      test: ["CMD", "nc", "-z", "127.0.0.1", "22"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    init: true

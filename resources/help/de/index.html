@@ -1,0 +1,1378 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="author" content="René Nicolaus" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>havRemote-Hilfe</title>
+    <link rel="icon" href="../../icons/havRemote.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../help.css" />
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#content">Direkt zum Hilfeinhalt</a>
+
+    <header>
+      <div class="hero">
+        <img
+          src="../../icons/havRemote.png"
+          width="512"
+          height="512"
+          alt="havRemote-Logo" />
+        <div>
+          <h1>havRemote-Hilfe</h1>
+          <p class="version">Version @HAVREMOTE_HELP_VERSION@</p>
+          <p class="tagline">
+            Dateien auf dem eigenen Computer und entfernten Systemen
+            durchsuchen, verwalten und übertragen.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <nav aria-label="Inhaltsverzeichnis der Hilfe">
+        <h2>Inhalt</h2>
+        <ol>
+          <li><a href="#getting-started">Erste Schritte</a></li>
+          <li><a href="#connections">Verbindungen und Anmeldung</a></li>
+          <li><a href="#tabs">Verbindungstabs</a></li>
+          <li><a href="#browsers">Dateibrowser</a></li>
+          <li><a href="#transfers">Übertragungen und Konflikte</a></li>
+          <li>
+            <a href="#file-operations">Dateioperationen und Berechtigungen</a>
+          </li>
+          <li><a href="#external-editing">Externes Bearbeiten</a></li>
+          <li><a href="#settings-history">Einstellungen und Verlauf</a></li>
+          <li><a href="#updates">Updates</a></li>
+          <li><a href="#security">Sicherheit</a></li>
+          <li><a href="#shortcuts">Tastenkürzel</a></li>
+          <li><a href="#configuration">Konfigurationsdateien</a></li>
+          <li><a href="#changelog">Änderungsprotokoll</a></li>
+          <li><a href="#troubleshooting">Problemlösung</a></li>
+        </ol>
+      </nav>
+
+      <main id="content">
+        <section id="getting-started">
+          <h2>Erste Schritte</h2>
+          <ol>
+            <li>
+              Verwenden Sie beim ersten Start den leeren Verbindungstab. Bei
+              späteren Starts werden Ihre bisherigen Tabs wiederhergestellt,
+              ohne die Verbindungen automatisch erneut aufzubauen. Erstellen Sie
+              bei Bedarf mit <kbd>Strg/⌘</kbd>+<kbd>T</kbd> einen neuen.
+            </li>
+            <li>
+              Wählen Sie unter <strong>Schnellverbindung</strong> ein Protokoll
+              aus und geben Sie Host, Port, Benutzername und Passwort ein. Geben
+              Sie im Host-Feld nur einen Hostnamen oder eine IP-Adresse ein -
+              kein URL-Schema, keinen Port, Pfad oder Benutzernamen. Neue FTP-
+              und FTPS-Verbindungen, die Sie direkt über die Schnellverbindung
+              einrichten, verwenden den passiven Modus. Konfigurieren Sie für
+              den aktiven Modus einen
+              <a href="#saving-a-site"
+                >gespeicherten Eintrag im <strong>Servermanager</strong></a
+              >.
+            </li>
+            <li>
+              Wählen Sie <strong>Verbinden</strong>.
+              <a href="#security"
+                >Prüfen Sie Zertifikats- und Hostschlüsselabfragen</a
+              >, bevor Sie diese bestätigen.
+            </li>
+            <li>
+              Wählen Sie links ein lokales Verzeichnis aus und wechseln Sie
+              rechts zum Zielverzeichnis auf dem Server.
+            </li>
+            <li>
+              Markieren Sie Dateien oder Verzeichnisse und wählen Sie
+              <strong>Hochladen</strong> oder <strong>Herunterladen</strong>.
+              Der <a href="#queue-actions">Übertragungsbereich</a> unten im
+              Fenster zeigt den Fortschritt.
+            </li>
+          </ol>
+          <p class="note">
+            <strong>Tipp:</strong> Verwenden Sie den
+            <strong>Servermanager</strong> für private Schlüssel, die Anmeldung
+            über einen SSH-Agenten oder die interaktive Anmeldung,
+            Startverzeichnisse, die FTP-Zeichenkodierung, den
+            FTP-Datenverbindungsmodus und regelmäßig verwendete Verbindungen.
+          </p>
+        </section>
+
+        <section id="connections">
+          <h2>Verbindungen und Anmeldung</h2>
+          <table>
+            <caption>
+              Verfügbare Verbindungsarten
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Protokoll</th>
+                <th scope="col">Üblicher Port</th>
+                <th scope="col">Schutz</th>
+                <th scope="col">Anmeldung</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Protokoll">FTP</td>
+                <td data-label="Üblicher Port">21</td>
+                <td data-label="Schutz">Keiner</td>
+                <td data-label="Anmeldung">Passwort</td>
+              </tr>
+              <tr>
+                <td data-label="Protokoll">Explizites FTPS</td>
+                <td data-label="Üblicher Port">21</td>
+                <td data-label="Schutz">
+                  TLS beginnt nach dem Verbindungsaufbau
+                </td>
+                <td data-label="Anmeldung">Passwort</td>
+              </tr>
+              <tr>
+                <td data-label="Protokoll">Implizites FTPS</td>
+                <td data-label="Üblicher Port">990</td>
+                <td data-label="Schutz">TLS beginnt sofort</td>
+                <td data-label="Anmeldung">Passwort</td>
+              </tr>
+              <tr>
+                <td data-label="Protokoll">SFTP</td>
+                <td data-label="Üblicher Port">22</td>
+                <td data-label="Schutz">SSH</td>
+                <td data-label="Anmeldung">
+                  Passwort, privater Schlüssel, SSH-Agent, interaktive
+                  Tastatureingabe oder Passwort + interaktive Tastatureingabe
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            Beim Auswählen eines Protokolls wechselt der angezeigte Port zum
+            üblichen Standardwert. Der Server kann jedoch einen anderen Port
+            verwenden. Neue, nicht gespeicherte Schnellverbindungen verwenden
+            die Passwortanmeldung. Erstellen Sie für andere SFTP-Anmeldearten
+            einen <a href="#saving-a-site">gespeicherten Server</a>. Wenn Sie
+            einen Tab für einen gespeicherten Server mit unveränderten
+            Verbindungsdaten erneut verbinden, bleiben dessen gespeicherte
+            Anmeldeart und FTP-Datenverbindungsmodus erhalten.
+          </p>
+          <p>
+            Neue, nicht gespeicherte FTP- und FTPS-Verbindungen verwenden den
+            passiven Modus, der für die meisten Verbindungen empfohlen wird. Für
+            einen gespeicherten FTP- oder FTPS-Server können Sie stattdessen
+            <strong>Aktiv</strong> auswählen. Im passiven Modus baut havRemote
+            die Datenverbindung zum Server auf. Im aktiven Modus verbindet sich
+            der Server mit Ihrem Computer. Firewall und Netzwerk müssen daher
+            eingehende Verbindungen zulassen. Standardmäßig verwendet havRemote
+            dieselbe lokale Adresse wie beim Verbindungsaufbau zum Server und
+            einen vom Betriebssystem gewählten temporären Port.
+          </p>
+          <p>
+            <strong>Lokale Adresse im aktiven Modus (optional)</strong> lässt
+            Sie eine andere IPv4- oder IPv6-Adresse auswählen, die diesem
+            Computer bereits zugewiesen ist. Lassen Sie das Feld für die
+            automatische Auswahl leer. Das kann bei einem VPN oder mehreren
+            Netzwerkverbindungen hilfreich sein, doch der Server muss die
+            gewählte Adresse erreichen können. havRemote verwendet sie sowohl
+            zum Empfangen der eingehenden Verbindung als auch als Zieladresse
+            für den Server. Es kann nicht an einer Adresse auf die Verbindung
+            warten und dem Server eine andere mitteilen, etwa die öffentliche
+            Adresse eines Routers. Geben Sie keine Klammern, keinen Port,
+            Hostnamen und keine URL-Syntax an.
+          </p>
+          <p>
+            Wählen Sie <strong>Interaktive Tastatureingabe</strong>, wenn der
+            Server alle Abfragen direkt bereitstellt. Innerhalb eines Austauschs
+            kann er sowohl nach einem Passwort als auch nach einem TOTP-Code
+            fragen. Wählen Sie
+            <strong>Passwort + interaktive Tastatureingabe</strong>, wenn der
+            Server zuerst das Kontopasswort annimmt und erst danach eine weitere
+            Abfrage anbietet, üblicherweise für TOTP. Das erste Passwort kann
+            gespeichert werden, Antworten auf interaktive Abfragen gelten jedoch
+            nur für die aktuelle Verbindung.
+          </p>
+          <p>
+            <strong>Privater Schlüssel</strong> liest die ausgewählte
+            Schlüsseldatei direkt und verwendet keinen SSH-Agenten.
+            <strong>SSH-Agent</strong> verwendet Schlüssel, die ein laufender,
+            kompatibler SSH-Agent bereitstellt. Wird kein Schlüssel akzeptiert,
+            wechselt havRemote nicht unbemerkt zu einem anderen Agenten oder
+            einer anderen Anmeldeart.
+          </p>
+          <p class="note">
+            <strong>Tipp:</strong> Die Anmeldung über einen SSH-Agenten
+            erfordert einen laufenden Agenten mit geladenem privaten Schlüssel.
+            havRemote startet einen Agenten nicht automatisch.
+          </p>
+          <details>
+            <summary>SSH-Agent-Auswahl je nach Betriebssystem</summary>
+            <ul>
+              <li>
+                <strong>Windows:</strong> havRemote verwendet Pageant, wenn es
+                ausgeführt wird. Andernfalls wird der Windows-OpenSSH-Agent
+                versucht.
+              </li>
+              <li>
+                <strong>Linux und macOS:</strong> Der OpenSSH-kompatible Agent
+                wird über die von havRemote geerbte Umgebungsvariable
+                <code>SSH_AUTH_SOCK</code> bestimmt.
+              </li>
+            </ul>
+          </details>
+          <p>
+            Ein
+            <strong>Hostschlüssel-Fingerabdruck des SFTP-Servers</strong>
+            identifiziert den Server und muss bei einer
+            <a href="#security">Vertrauensabfrage</a> geprüft werden. Ein nach
+            einer Agentenanmeldung gemeldeter
+            <strong>Fingerabdruck der Clientidentität</strong> bezeichnet den
+            Schlüssel, den der Server von Ihnen akzeptiert hat. Diese
+            Fingerabdrücke stehen für die beiden unterschiedlichen Seiten der
+            Verbindung und stimmen normalerweise nicht überein.
+          </p>
+
+          <h3 id="saving-a-site">Server speichern</h3>
+          <ol>
+            <li>
+              Öffnen Sie <strong>Datei → Servermanager</strong> oder drücken Sie
+              <kbd>Strg/⌘</kbd>+<kbd>S</kbd>.
+            </li>
+            <li>
+              Wählen Sie <strong>Neuer Server</strong>, geben Sie einen
+              aussagekräftigen Namen ein und wählen Sie das Protokoll.
+            </li>
+            <li>
+              Geben Sie Endpunkt und Anmeldedaten ein. Sie können außerdem ein
+              lokales und entferntes Startverzeichnis sowie bei FTP oder FTPS
+              den Datenverbindungsmodus und optional eine andere lokale Adresse
+              für den aktiven Modus auswählen.
+            </li>
+            <li>
+              Speichern Sie die Änderungen mit <strong>OK</strong> oder wählen
+              Sie <strong>Verbinden</strong>, um zu speichern und eine
+              Verbindung zum ausgewählten Server herzustellen.
+              <strong>Abbrechen</strong> verwirft Ihre Änderungen.
+            </li>
+          </ol>
+          <p>
+            Mit <strong>Neuer Ordner</strong> erstellen Sie eine verschachtelte
+            Ordnerstruktur. Ziehen Sie Server oder Ordner oberhalb oder
+            unterhalb eines anderen Eintrags, um sie neu anzuordnen, auf die
+            Mitte eines Ordners, um sie hineinzuverschieben, oder auf eine freie
+            Fläche, um sie auf die oberste Ebene zu verschieben. Server und
+            Ordner können in beliebiger Reihenfolge gemischt werden.
+            <strong>Duplizieren</strong> kopiert einen ausgewählten Server oder
+            rekursiv einen ausgewählten Ordner mit allen Unterordnern und
+            Servern. Gespeicherte Passwörter und Schlüssel-Passphrasen werden
+            von keiner Kopie gemeinsam verwendet. Geben Sie diese bei Bedarf
+            separat ein.
+          </p>
+          <p>
+            Server und Ordner müssen innerhalb desselben Ordners (einschließlich
+            der obersten Ebene) unterschiedliche Namen haben. In verschiedenen
+            Ordnern können Namen erneut verwendet werden. Beim Duplizieren eines
+            Ordners bleiben die Namen innerhalb der Kopie unverändert.
+          </p>
+          <p>
+            Beim Löschen eines Ordners im Servermanager werden der Ordner und
+            alle darin verschachtelten gespeicherten Ordner und Server entfernt.
+            Die Änderung wird erst beim Speichern mit <strong>OK</strong> oder
+            <strong>Verbinden</strong> übernommen. Dateien oder Verzeichnisse
+            auf einem entfernten Server werden dadurch niemals gelöscht.
+          </p>
+          <p>
+            Wählen Sie im Servermanager einen Server und dann
+            <strong>Verbinden</strong> oder öffnen Sie einen gespeicherten
+            Server mit dem Pfeil neben der Servermanager-Schaltfläche im
+            Hauptfenster. Wenn ein Ordner oder kein Eintrag ausgewählt ist,
+            steht Verbinden nicht zur Verfügung. havRemote verwendet nach
+            Möglichkeit den aktuellen unveränderten Tab. Andernfalls wird ein
+            <a href="#tabs">vorhandener Tab</a> desselben gespeicherten Servers
+            aktiviert und bei Bedarf erneut verbunden. Nur wenn kein passender
+            Tab verfügbar ist, wird ein neuer geöffnet.
+          </p>
+
+          <h3>Server importieren und exportieren</h3>
+          <p>
+            Wählen Sie im Servermanager <strong>Exportieren...</strong>, um den
+            ausgewählten Server, einen ausgewählten Ordner mit seinem gesamten
+            Inhalt oder alle Einträge in eine <code>.cson</code>-Datei zu
+            exportieren. Die aktuell bearbeiteten Einstellungen werden
+            exportiert ohne den Servermanager-Dialog zu speichern.
+            Ordnerstruktur und Reihenfolge bleiben erhalten.
+          </p>
+          <p>
+            Mit <strong>Importieren...</strong> laden Sie einen
+            havRemote-Serverexport in den ausgewählten Ordner, neben einen
+            ausgewählten Server oder bei leerer Auswahl auf die oberste Ebene.
+            Prüfen Sie vor dem Import die Vorschau. Vorhandene Einträge bleiben
+            erhalten. Bei Namenskonflikten werden umbenannte Kopien zur
+            Bestätigung angezeigt. Speichern Sie die importierten Einträge mit
+            <strong>OK</strong> oder <strong>Verbinden</strong>.
+            <strong>Abbrechen</strong> im Servermanager verwirft die Änderungen.
+          </p>
+          <p>
+            Exporte enthalten keine Passwörter, Anmeldedaten-Kennungen,
+            Vertrauenseinträge, Schlüsseldateien oder deren lokale Pfade,
+            lokalen Startordner oder lokalen Adressvorgaben für den aktiven
+            Modus. Wählen Sie für importierte Server mit privatem Schlüssel vor
+            dem Speichern oder Verbinden eine lokale Schlüsseldatei aus. Geben
+            Sie fehlende Anmeldedaten bei Bedarf erneut ein und prüfen Sie die
+            Serveridentität wie gewohnt. Servernamen, Benutzernamen und
+            entfernte Pfade sind weiterhin private Metadaten. Prüfen Sie eine
+            Datei vor dem Weitergeben.
+          </p>
+
+          <h3>Verbindung trennen</h3>
+          <p>
+            Während einer aktiven Verbindung wird die Schaltfläche
+            <strong>Verbinden</strong> zu <strong>Trennen</strong>. Dabei
+            bleiben der Tab und sein lokaler Browser geöffnet. Übertragungen
+            oder extern bearbeitete Dateien dieser Verbindung können eine
+            Bestätigung erfordern, bevor die Verbindung oder der Tab geschlossen
+            werden kann.
+          </p>
+        </section>
+
+        <section id="tabs">
+          <h2>Verbindungstabs</h2>
+          <p>
+            Jeder Tab besitzt eine eigene Verbindung, einen lokalen Browser,
+            einen Serverbrowser und ein gemerktes Verzeichnispaar. Beim Wechseln
+            des Tabs stellt havRemote dessen Schnellverbindungsfelder und beide
+            Dateiansichten wieder her. Daher müssen Sie den lokalen Browser
+            nicht für jeden Server erneut einstellen.
+          </p>
+          <ul>
+            <li>
+              Erstellen Sie mit der Plus-Schaltfläche oder
+              <kbd>Strg/⌘</kbd>+<kbd>T</kbd> einen Tab.
+            </li>
+            <li>
+              Schließen Sie den aktuellen Tab über dessen
+              Schließen-Schaltfläche, mit einem Mittelklick oder
+              <kbd>Strg/⌘</kbd>+<kbd>W</kbd>.
+            </li>
+            <li>Ziehen Sie Tabs mit der Maus, um sie neu anzuordnen.</li>
+            <li>Ein neuer, leerer Tab beginnt mit ausgewähltem SFTP.</li>
+          </ul>
+          <p>
+            Beim nächsten Start stellt havRemote die geöffneten Tabs in ihrer
+            bisherigen Reihenfolge wieder her und wählt den Tab aus, der beim
+            Beenden aktiv war. Die Identitäten gespeicherter Server und von
+            Schnellverbindungen sowie beide Browserpfade werden
+            wiederhergestellt. Die Verbindungen bleiben jedoch getrennt und
+            Geheimnisse werden niemals im Arbeitsbereich gespeichert. Verbinden
+            Sie die benötigten Tabs erneut.
+          </p>
+          <p>
+            <a href="#queue-actions">Warteschlange</a> und Meldungsprotokoll
+            gelten für alle Tabs. Die Spalte <strong>Verbindung</strong> zeigt
+            zu welchem Tab eine Übertragung gehört. Mit der Schaltfläche zum
+            Leeren neben der Überschrift des Meldungsprotokolls verwerfen Sie
+            die derzeit angezeigten Meldungen.
+          </p>
+        </section>
+
+        <section id="browsers">
+          <h2>Dateibrowser</h2>
+          <p>
+            Der linke Browser zeigt lokale Dateien, der rechte den aktiven
+            Server. Navigieren Sie mit dem Pfadfeld, <strong>Hoch</strong>,
+            <strong>Aktualisieren</strong> oder dem Eintrag <code>..</code>.
+            Drücken Sie nach Eingabe eines Pfads <kbd>Eingabe</kbd>. Durch
+            Aktivieren eines Verzeichnisses wird es geöffnet. Bei einer
+            regulären Datei wird ein Upload oder Download eingereiht.
+          </p>
+          <ul>
+            <li>
+              Klicken Sie auf eine Spaltenüberschrift, um zu sortieren. Ein
+              weiterer Klick kehrt die Richtung um. Ziehen Sie die Trennlinie
+              einer Überschrift, um die Spaltenbreite zu ändern. Sortierung und
+              Spaltenbreiten werden für lokale und entfernte Listen getrennt
+              gespeichert und in allen Verbindungstabs verwendet.
+            </li>
+            <li>
+              Die Spalte <strong>Typ</strong> kennzeichnet reguläre Dateien
+              anhand ihrer letzten Dateiendung, etwa als
+              <strong>TXT-Datei</strong> oder <strong>GZ-Datei</strong> für
+              <code>archive.tar.gz</code>. Dateien ohne Endung, darunter
+              <code>.gitignore</code>, erscheinen weiterhin als
+              <strong>Datei</strong>. Beim Sortieren nach Typ werden Dateien
+              unabhängig von Groß- und Kleinschreibung nach Endung und
+              anschließend nach Namen sortiert. Ordner und
+              <code>..</code> bleiben in beiden Richtungen oben.
+            </li>
+            <li>
+              Öffnen Sie das Kontextmenü einer Auswahl mit einem Sekundärklick
+              oder unter macOS mit <kbd>Control</kbd>-Klick, um auf die
+              verfügbaren Aktionen zum Hoch- oder Herunterladen, Bearbeiten,
+              Umbenennen, Löschen, Erstellen, Ändern von Berechtigungen und
+              Aktualisieren zuzugreifen. Unter Windows und Linux können Sie
+              außerdem die Kontextmenü-Taste oder <kbd>Umschalt</kbd>+<kbd
+                >F10</kbd
+              >
+              verwenden.
+            </li>
+            <li>
+              Ziehen Sie ausgewählte lokale Elemente auf die Serverliste, um sie
+              hochzuladen oder entfernte Elemente auf die lokale Liste, um sie
+              herunterzuladen. Diese anwendungsinternen Ablagevorgänge
+              funktionieren zwischen den beiden Listen desselben Verbindungstabs
+              und verwenden das aktuell angezeigte Zielverzeichnis. Sie können
+              außerdem Dateien oder Verzeichnisse aus dem Dateimanager auf eine
+              verbundene Serverliste ziehen, um sie hochzuladen.
+            </li>
+            <li>
+              Die Serverliste kann
+              <a href="#remote-permissions">Berechtigungen</a> sowie
+              Besitzer/Gruppen-Daten anzeigen, wenn der Server sie liefert. Ein
+              leerer Wert bedeutet gewöhnlich, dass das Protokoll oder der
+              Server diese Angabe nicht bereitgestellt hat.
+            </li>
+            <li>
+              Symbolische Verknüpfungen werden als Links angezeigt, bei
+              rekursiven Übertragungen jedoch nie verfolgt.
+            </li>
+            <li>
+              Verwenden Sie <strong>Aktualisieren</strong>, wenn ein anderes
+              Programm oder ein serverseitiger Prozess das Verzeichnis verändert
+              haben könnte. havRemote aktualisiert außerdem ein sichtbares
+              lokales Ziel nach einem Download und ein sichtbares entferntes
+              Ziel nach einem Upload.
+            </li>
+          </ul>
+        </section>
+
+        <section id="transfers">
+          <h2>Übertragungen, Konflikte und Fortsetzen</h2>
+          <h3>Übertragung starten</h3>
+          <p>
+            Markieren Sie ein oder mehrere lokale Elemente und wählen Sie
+            <strong>Hochladen</strong> oder markieren Sie entfernte Elemente und
+            wählen Sie <strong>Herunterladen</strong>. Verzeichnisse werden
+            rekursiv erfasst und übertragen. Dateien aus verschiedenen
+            Verbindungstabs teilen sich die Warteschlange und die
+            <a href="#transfer-settings"
+              >eingestellte Obergrenze für gleichzeitige Übertragungen</a
+            >.
+          </p>
+
+          <h3 id="queue-actions">Warteschlangenansichten und Aktionen</h3>
+          <p>
+            Das Kontextmenü bietet dieselben Aktionen wie die Schaltflächen mit
+            derselben Verfügbarkeit sowie zusätzlich
+            <strong>Alle kopieren</strong>.
+          </p>
+          <ul>
+            <li>
+              <strong>Warteschlange</strong> enthält wartende, erfasste,
+              laufende und pausierte Vorgänge.
+            </li>
+            <li>
+              <strong>Fehlgeschlagen</strong> enthält Übertragungen, die mit
+              einem Fehler beendet oder abgebrochen wurden.
+            </li>
+            <li>
+              <strong>Abgeschlossen</strong> enthält erfolgreich beendete
+              Vorgänge.
+            </li>
+            <li>
+              <strong>Pause</strong>, <strong>Abbrechen</strong> und
+              <strong>Erneut versuchen</strong> erfordern genau eine markierte
+              Übertragung, für die die Aktion möglich ist. Bei mehreren
+              markierten Einträgen sind sie deaktiviert.
+            </li>
+            <li>
+              <strong>Entfernen</strong> erfordert genau einen markierten
+              abgeschlossenen, fehlgeschlagenen oder abgebrochenen Eintrag und
+              löscht ihn aus den Warteschlangendaten. Beim Entfernen einer
+              fehlgeschlagenen Übertragung ist eine Bestätigung erforderlich, da
+              deren Wiederholungs- und Wiederherstellungsinformationen verworfen
+              werden.
+            </li>
+            <li>
+              <strong>Leeren</strong> entfernt alle Einträge der aktuellen
+              Ansicht Fehlgeschlagen oder Abgeschlossen und zeigt bei
+              fehlgeschlagenen Übertragungen dieselbe Warnung. Unvollständige
+              lokale Dateien und temporäre Dateien auf dem Server bleiben zur
+              Sicherheit erhalten.
+            </li>
+            <li>
+              <strong>Kopieren</strong> kopiert markierte Einträge in jeder der
+              drei Ansichten. Verwenden Sie die Kopieren-Schaltfläche, die
+              Kontextmenü-Aktion oder <kbd>Strg/⌘</kbd>+<kbd>C</kbd>, während
+              die Übertragungsliste den Fokus hat. Markieren Sie mehrere
+              Einträge mit <kbd>Strg/⌘</kbd> oder <kbd>Umschalt</kbd> oder
+              drücken Sie <kbd>Strg/⌘</kbd>+<kbd>A</kbd>, um alle Einträge der
+              fokussierten Liste auszuwählen.
+            </li>
+            <li>
+              <strong>Alle kopieren</strong> im Kontextmenü kopiert die gesamte
+              aktuelle Ansicht. Kopieren ist nur bei einer Auswahl verfügbar.
+              Alle kopieren ist verfügbar, sobald die Ansicht nicht leer ist.
+            </li>
+          </ul>
+          <p>
+            Übertragungen werden als tabulatorgetrennter Klartext mit
+            übersetzten Spaltenüberschriften, allen angezeigten Spalten und
+            vollständigen Fehlerdetails kopiert. Kopieren reiht Übertragungen
+            weder erneut ein noch ändert es deren Status.
+          </p>
+          <p>
+            Wählen Sie in der Schaltflächenleiste oder im Kontextmenü
+            <strong>Exportieren... → Auswahl exportieren...</strong> oder
+            <strong>Alle exportieren...</strong>, um aus jeder
+            Übertragungsansicht einen <code>.csv</code>-Bericht zu speichern.
+            Der Bericht erfasst die Einträge vor dem Öffnen des Speicherdialogs
+            mit übersetzten Überschriften, aktueller Spaltenreihenfolge und
+            vollständigen Fehlerdetails. Der Auswahlexport benötigt markierte
+            Einträge. Der Export der gesamten Ansicht benötigt eine nicht leere
+            Ansicht. Berichte ändern keine Übertragungen und können nicht zum
+            Wiederherstellen einer Warteschlange importiert werden. Nur noch in
+            der Ansicht vorhandene Einträge können exportiert werden.
+          </p>
+          <p>
+            CSV-Berichte verwenden UTF-8 und durch Kommas getrennte, in
+            Anführungszeichen gesetzte Felder. Wählen Sie beim Öffnen in einer
+            Tabellenkalkulation bei Bedarf UTF-8 und Komma als Trennzeichen.
+            Geheimnisse und Steuerzeichen werden bereinigt. Formelähnlichem Text
+            wird ein Apostroph vorangestellt. Das Überschreiben vorhandener
+            Dateien erfordert eine Bestätigung. Anwendungskonfiguration,
+            Übertragungswiederherstellung und gespeicherte Hostschlüssel dürfen
+            nicht durch einen Export ersetzt werden.
+          </p>
+          <p>
+            Die Spalten <strong>Geschwindigkeit</strong> und
+            <strong>Restzeit</strong> zeigen für laufende Dateiübertragungen
+            einen aktuellen Durchschnitt. Die Restzeit ist nur verfügbar, wenn
+            die Gesamtgröße bekannt ist. Bei pausierten, wartenden und beendeten
+            Einträgen sowie beim Erfassen von Verzeichnissen bleiben diese
+            Felder leer.
+          </p>
+          <p>
+            Fehlgeschlagene Uploads und Downloads erzeugen einen Fehlereintrag
+            im Nachrichtenprotokoll und zeigen einen Fehlerdialog mit der
+            Verbindung, Übertragungsrichtung, dem Pfad auf dem Server und dem
+            Fehler an. Zeitlich nahe beieinander auftretende Fehler werden in
+            einer Meldung zusammengefasst. Die Übertragungen bleiben unter
+            <strong>Fehlgeschlagen</strong>. Markieren Sie nach dem Beheben des
+            Problems einen Eintrag und wählen Sie
+            <strong>Erneut versuchen</strong>. Beim Pausieren oder Abbrechen
+            werden diese Fehlermeldungen nicht ausgelöst. Beim Start von
+            havRemote wiederhergestellte Fehler lösen sie nicht erneut aus.
+          </p>
+          <p>
+            FTP/FTPS-Uploads melden unzureichenden Speicherplatz oder ein
+            überschrittenes Speicherlimit, wenn der Server diesen Grund angibt.
+            Scheitert die Verbindung, bevor eine abschließende Antwort verfügbar
+            ist, kann havRemote möglicherweise nur eine Verbindungsunterbrechung
+            melden. Bitten Sie bei unklarer Ursache den Serveradministrator, die
+            Serverprotokolle zu prüfen. Teilweise hochgeladene Dateien bleiben
+            erhalten, damit Sie nach dem Beheben des Problems einen erneuten
+            Versuch starten oder die Übertragung
+            <a href="#safe-resume">sicher fortsetzen</a> können.
+          </p>
+          <p>
+            Ein Server kann einen abschließenden Vorgang bereits ausgeführt
+            haben, auch wenn seine Antwort verloren ging. havRemote wiederholt
+            destruktive Vorgänge mit ungewissem Ergebnis nicht automatisch.
+            Prüfen Sie das Ziel, bevor Sie einen erneuten Versuch bestätigen.
+          </p>
+
+          <h3 id="destination-conflicts">Zielkonflikte</h3>
+          <p>
+            Mit <strong>Nachfragen</strong>, der anfänglichen
+            Standardeinstellung, bietet havRemote die für die jeweilige
+            Übertragung sicheren Möglichkeiten an:
+          </p>
+          <ul>
+            <li><strong>Überschreiben</strong> ersetzt das Ziel.</li>
+            <li><strong>Überspringen</strong> lässt das Ziel unverändert.</li>
+            <li>
+              <strong>Umbenennen</strong> überträgt das neue Element unter einem
+              anderen Namen.
+            </li>
+            <li>
+              <a href="#safe-resume"><strong>Fortsetzen</strong></a> führt eine
+              geprüfte Teilübertragung weiter.
+            </li>
+          </ul>
+          <p>
+            Eine Auswahl kann auf verbleibende Konflikte in der Warteschlange
+            angewendet werden. Sicherheitsrelevante Konflikte, beispielsweise
+            eine während
+            <a href="#external-editing">externer Bearbeitung</a> auf dem Server
+            geänderte Datei, werden immer einzeln behandelt.
+          </p>
+          <p>
+            Wenn Sie eine eingehende Datei umbenennen, merkt sich havRemote das
+            gewählte Ziel für erneute Versuche, auch nach einem Neustart der
+            Anwendung. Bei Verzeichnisübertragungen wird der gewählte Name für
+            jede Datei einzeln gespeichert. Die Informationen zum Fortsetzen
+            bleiben diesem Ziel zugeordnet. Bei einem neuen Namen werden keine
+            Wiederherstellungsdaten für das alte Ziel verwendet.
+          </p>
+
+          <h3 id="safe-resume">Teildateien und sicheres Fortsetzen</h3>
+          <p>
+            Downloads verwenden eine gleichnamige Datei mit der Endung
+            <code>.havremote.part</code>. Uploads verwenden einen temporären
+            Namen auf dem Server, sofern dieser das unterstützt. Fortsetzen wird
+            nur angeboten, wenn die aufgezeichneten Quell- und Zielmetadaten
+            weiterhin übereinstimmen. Starten Sie andernfalls neu oder wählen
+            Sie eine andere <a href="#destination-conflicts">Konfliktaktion</a>.
+          </p>
+          <p>
+            Das Fortsetzen von FTP- und FTPS-Uploads muss vom Server unterstützt
+            werden. Ist dies nicht der Fall, starten Sie den Upload von vorn
+            oder bitten Sie den Serveradministrator das Fortsetzen von Uploads
+            zu erlauben.
+          </p>
+        </section>
+
+        <section id="file-operations">
+          <h2>Dateioperationen und Berechtigungen</h2>
+          <h3>Lokale Dateien</h3>
+          <ul>
+            <li>
+              <strong>Neuer Ordner</strong> erstellt ein Verzeichnis am
+              aktuellen Ort.
+            </li>
+            <li>
+              <strong>Bearbeiten</strong> öffnet eine markierte Datei im
+              <a href="#external-editing">eingerichteten externen Editor</a>.
+            </li>
+            <li>
+              <strong>Umbenennen</strong> bearbeitet den Namen des ausgewählten
+              Elements.
+            </li>
+            <li>
+              <strong>Löschen</strong> verschiebt ausgewählte Elemente nach
+              Möglichkeit in den Papierkorb. Ist dies nicht möglich, können
+              betroffene Elemente endgültig gelöscht werden.
+            </li>
+          </ul>
+
+          <h3>Dateien auf dem Server</h3>
+          <ul>
+            <li>
+              Erstellen Sie eine leere Datei oder ein Verzeichnis am aktuellen
+              entfernten Ort.
+            </li>
+            <li>Benennen Sie Dateien und Verzeichnisse um.</li>
+            <li>Öffnen Sie eine reguläre Datei zur externen Bearbeitung.</li>
+            <li>
+              Ändern Sie den Berechtigungsmodus eines oder mehrerer
+              unterstützter Elemente.
+            </li>
+            <li>
+              Löschen Sie ausgewählte Elemente endgültig. Entfernte
+              Verzeichnisse werden rekursiv gelöscht.
+            </li>
+          </ul>
+          <p class="warning">
+            <strong>Warnung:</strong> Das Löschen auf dem Server ist endgültig
+            und kann von havRemote nicht rückgängig gemacht werden. Lesen Sie
+            die Bestätigung besonders bei Verzeichnissen oder einer
+            Mehrfachauswahl sorgfältig.
+          </p>
+          <p>
+            Wenn eine der Dateilisten den Fokus hat, drücken Sie
+            <a href="#shortcuts"><kbd>Entf</kbd></a> ohne Zusatztasten, um ein
+            oder mehrere markierte Elemente mit derselben Bestätigung wie über
+            die Schaltfläche zu löschen. Entfernte Elemente werden endgültig
+            gelöscht. Lokale Elemente werden nach Möglichkeit in den Papierkorb
+            verschoben. Andernfalls können sie endgültig gelöscht werden.
+            Während Sie einen Pfad eingeben oder einen Dateinamen bearbeiten,
+            löscht dieses Tastenkürzel keine Dateien. <kbd>Umschalt</kbd>+<kbd
+              >Entf</kbd
+            >
+            umgeht die Bestätigung nicht und ändert auch das lokale
+            Löschverhalten nicht.
+          </p>
+
+          <h3 id="remote-permissions">Entfernte Berechtigungen ändern</h3>
+          <p>
+            Markieren Sie eine oder mehrere entfernte Dateien oder Verzeichnisse
+            und wählen Sie <strong>Berechtigungen</strong>. Legen Sie die
+            Lesen-/Schreiben-/Ausführen-Bits für Besitzer, Gruppe und Sonstige
+            sowie optional setuid, setgid und das Sticky-Bit fest oder geben Sie
+            einen exakten drei- oder vierstelligen Oktalmodus wie
+            <code>0755</code> ein. Die Verfügbarkeit hängt vom Server ab.
+            havRemote ändert keine Berechtigungen des entfernten
+            Wurzelverzeichnisses, symbolischer Verknüpfungen oder spezieller
+            Dateien.
+          </p>
+        </section>
+
+        <section id="external-editing">
+          <h2>Externes Bearbeiten</h2>
+          <p>
+            Öffnen Sie die
+            <a href="#settings-history"><strong>Einstellungen</strong></a
+            >, um die Standardanwendung des Betriebssystems oder einen
+            benutzerdefinierten Editor auszuwählen. Eine benutzerdefinierte
+            Argumentvorlage muss genau einmal <code>{file}</code> enthalten.
+            havRemote setzt den Dateipfad als einzelnes, wörtliches Argument
+            ein, ohne eine Befehlsshell aufzurufen.
+          </p>
+
+          <h3>Lokale Dateien</h3>
+          <p>
+            Markieren Sie eine lokale Datei und wählen Sie
+            <strong>Bearbeiten</strong>. Falls der Dateityp bei Verwendung der
+            Standardanwendung gesperrt ist, wählen Sie einen vertrauenswürdigen
+            benutzerdefinierten Editor, um die Datei als Daten zu öffnen.
+          </p>
+
+          <h3>Dateien auf dem Server</h3>
+          <p>
+            havRemote lädt eine private Arbeitskopie herunter, öffnet sie im
+            Editor, überwacht stabile Speichervorgänge und lädt Änderungen über
+            die normale <a href="#queue-actions">Warteschlange</a> hoch. Vor dem
+            Ersetzen prüft havRemote, ob die Datei auf dem Server seit dem
+            Öffnen verändert wurde. In diesem Fall fragt die Anwendung nach,
+            bevor sie die neuere Version überschreibt.
+          </p>
+          <p class="note">
+            <strong>havRemote geöffnet lassen:</strong> Lassen Sie Verbindung
+            und Tab während der Bearbeitung geöffnet. Falls Überwachung,
+            Prüfung, Trennung oder Beenden einen sicheren Upload verhindern,
+            behält havRemote die lokale Wiederherstellungskopie und meldet ihren
+            Speicherort.
+          </p>
+        </section>
+
+        <section id="settings-history">
+          <h2>Einstellungen und Verlauf</h2>
+          <h3>Darstellung und Sprache</h3>
+          <p>
+            Im Einstellungsdialog können Sie ein helles oder dunkles Design und
+            eine der verfügbaren Sprachen auswählen. Sprachänderungen werden
+            sofort angewendet. Eine Designänderung wird nach einem Neustart von
+            havRemote wirksam.
+          </p>
+          <p>
+            Öffnen Sie <strong>Hilfe → Hilfe anzeigen</strong> oder drücken Sie
+            <kbd>F1</kbd>, um die Hilfe in der ausgewählten Anwendungssprache zu
+            lesen. Ist keine passende Hilfeseite installiert, öffnet havRemote
+            stattdessen die englische Hilfe.
+          </p>
+
+          <h3 id="transfer-settings">Übertragungen und Verbindungen</h3>
+          <p>
+            <strong>Gleichzeitige Übertragungen</strong> begrenzt die Anzahl der
+            Dateiübertragungen, die über alle Verbindungstabs hinweg ausgeführt
+            werden und wird nach einem Neustart wirksam. Das
+            <strong>Verbindungszeitlimit</strong> begrenzt die Dauer eines neuen
+            Verbindungsaufbaus. Das <strong>Leerlaufzeitlimit</strong> begrenzt,
+            wie lange ein Befehl ohne Netzwerkfortschritt bleiben darf.
+            Änderungen der Zeitlimits gelten nach dem erneuten Verbinden eines
+            Tabs.
+          </p>
+          <p>
+            Für FTP/FTPS-Dateiuploads und -downloads gilt ein separates
+            Zeitlimit bei zu geringer Übertragungsgeschwindigkeit: Die
+            Übertragung schlägt fehl, wenn der gemessene Durchsatz 30 Sekunden
+            lang unter 1 Byte/s bleibt. Dies gilt im passiven und aktiven Modus,
+            auch für explizites und implizites FTPS. Die Gesamtdauer einer
+            Übertragung wird dadurch nicht begrenzt. Kurze Unterbrechungen sind
+            erlaubt. Bei einer Zeitüberschreitung bleiben Teildateien zum
+            <a href="#safe-resume">sicheren Fortsetzen</a> erhalten. Ein
+            automatischer Wiederholungsversuch erfolgt nicht. Das
+            Leerlaufzeitlimit gilt weiterhin für FTP-Befehlsantworten und
+            SFTP-Vorgänge.
+          </p>
+          <p>
+            Als
+            <a href="#destination-conflicts"
+              ><strong>Standardaktion bei Konflikten</strong></a
+            >
+            stehen Nachfragen, Überschreiben, Überspringen, Eingehendes Element
+            umbenennen und Fortsetzen, wenn sicher zur Auswahl. Eine Änderung
+            gilt sofort für neu eingereihte Übertragungen. Vorhandene
+            Warteschlangeneinträge behalten die Richtlinie, mit der sie erstellt
+            wurden.
+          </p>
+          <p>
+            Nach dem Speichern einer Änderung am Design oder an der Anzahl
+            gleichzeitiger Übertragungen bietet havRemote einen sofortigen
+            Neustart an. Lehnen Sie ab, um diese Änderungen erst beim nächsten
+            Start anzuwenden. Die Abfrage warnt vor nicht abgeschlossenen
+            Übertragungen und in externen Editoren geöffneten Dateien:
+            Unterbrochene Übertragungen erscheinen bei der Wiederherstellung
+            pausiert. Der Neustart beendet die Überwachung bearbeiteter Dateien,
+            sodass spätere Speichervorgänge im Editor nicht mehr automatisch
+            hochgeladen werden.
+          </p>
+
+          <h3>Schnellverbindungsverlauf</h3>
+          <p>
+            Nach einer erfolgreichen, nicht gespeicherten Schnellverbindung
+            merkt sich havRemote bis zu 20 zuletzt verwendete Endpunkte. Über
+            die Verlauf-Schaltfläche können Sie einen Endpunkt erneut verwenden
+            oder die gesamte Liste löschen. Der Verlauf speichert nur Protokoll,
+            Host, Port und Benutzernamen - niemals das Passwort. Beim Löschen
+            werden auch die gemerkten Verzeichnispaare dieser Endpunkte
+            entfernt.
+          </p>
+
+          <h3>Gemerkter Arbeitsbereich</h3>
+          <p>
+            havRemote merkt sich
+            <a href="#tabs">geöffnete Tabs und ihre Reihenfolge</a>, den
+            ausgewählten Tab, lokale und entfernte Verzeichnisse für
+            gespeicherte Server und zuletzt verwendete Endpunkte, Sortierung und
+            Spaltenbreiten der lokalen und entfernten Listen sowie Größe,
+            Position und maximierten Zustand des Hauptfensters. Wählen Sie
+            <strong
+              >Einstellungen → Hauptfenster → Standardgröße
+              wiederherstellen</strong
+            >
+            und klicken Sie anschließend auf <strong>OK</strong>, um die
+            Standardabmessungen anzuwenden und zu speichern.
+            <strong>Abbrechen</strong> lässt die Fensterposition und -größe
+            unverändert. Beim Öffnen eines gespeicherten Servers wird zuerst
+            dessen gemerktes Verzeichnispaar wiederhergestellt. Die
+            eingestellten Startverzeichnisse werden nur verwendet, wenn noch
+            kein gemerktes Paar vorhanden ist.
+          </p>
+
+          <h3 id="transfer-recovery">Wiederherstellung von Übertragungen</h3>
+          <p>
+            Nicht abgeschlossene und fehlgeschlagene Übertragungen werden
+            getrennt in <code>queue.cson</code> gespeichert. Den Speicherort
+            finden Sie unter
+            <a href="#configuration">Konfigurationsdateien und Speicherorte</a>.
+            Nach einem Neustart erscheint unterbrochene Arbeit pausiert in einem
+            wiederhergestellten Verbindungstab. Wählen Sie diesen Tab, stellen
+            Sie die Verbindung zum selben Server und exakt gleichen Endpunkt her
+            und wählen Sie anschließend <strong>Erneut versuchen</strong>.
+            Abgeschlossene und abgebrochene Übertragungen werden nicht als
+            dauerhafter Verlauf behalten. Die Warteschlangendatei enthält Pfade,
+            Endpunktidentität, Fortschritt, Fehler und Metadaten für sicheres
+            Fortsetzen, jedoch keine Passwörter oder Schlüssel-Passphrasen.
+          </p>
+          <p class="warning">
+            <strong
+              >Wenn die Warteschlangendatei nicht geladen werden kann:</strong
+            >
+            havRemote meldet den Fehler und lässt die Datei unverändert.
+            Übertragungen bleiben nutzbar, die Warteschlange wird in dieser
+            Sitzung jedoch nicht gespeichert. Neue Änderungen gehen daher bei
+            einem Neustart verloren. Schließen Sie havRemote, sichern Sie
+            <code>queue.cson</code>, korrigieren oder verschieben Sie die Datei
+            und starten Sie die Anwendung neu, um die Wiederherstellungsdaten
+            erneut speichern zu können. havRemote setzt eine ungültige
+            Warteschlange nicht automatisch zurück.
+          </p>
+        </section>
+
+        <section id="updates">
+          <h2>Updates</h2>
+          <p>
+            Wählen Sie <strong>Hilfe → Nach Updates suchen</strong>, um auf
+            GitHub nach der neuesten veröffentlichten havRemote-Version zu
+            suchen, die nicht als Vorabversion gekennzeichnet ist. Eine manuelle
+            Suche wird auch ausgeführt, wenn automatische Suchen deaktiviert
+            sind oder diese Version zuvor übersprungen wurde.
+          </p>
+          <p>
+            <strong>Einmal täglich automatisch nach Updates suchen</strong> ist
+            standardmäßig aktiviert. Beim Start prüft havRemote nur, wenn in den
+            letzten 24 Stunden kein Versuch abgeschlossen wurde.
+            <strong>Diese Version überspringen</strong> unterdrückt automatische
+            Hinweise nur für genau diese Version. Eine neuere Veröffentlichung
+            wird weiterhin angezeigt und eine manuelle Suche zeigt auch die
+            übersprungene Version.
+          </p>
+          <p>
+            Veröffentlichungshinweise werden als schreibgeschützter Klartext
+            angezeigt. <strong>Herunterladen</strong> öffnet den Download-Link
+            in Ihrem Standardbrowser.
+            <strong>Veröffentlichung anzeigen</strong> öffnet die GitHub-Seite
+            der Veröffentlichung. havRemote installiert keine Updates und
+            ersetzt keine Programmdateien.
+          </p>
+          <p class="note">
+            <strong>Datenschutz:</strong> Update-Suchen verwenden die
+            öffentliche GitHub-Releases-API des Projekts über HTTPS. Es werden
+            weder ein GitHub-Konto noch ein Zugriffstoken oder
+            Repository-Geheimnis benötigt. GitHub erhält die gewöhnlichen
+            Verbindungsdaten einer HTTPS-Anfrage, beispielsweise die öffentliche
+            IP-Adresse.
+          </p>
+        </section>
+
+        <section id="security">
+          <h2>Sicherheit</h2>
+          <ul>
+            <li>
+              <strong>SFTP oder FTPS bevorzugen.</strong> Unverschlüsseltes FTP
+              überträgt Anmeldedaten und Dateiinhalte ungeschützt und erzeugt
+              daher immer eine Warnung.
+            </li>
+            <li>
+              <strong>Vertrauensabfragen prüfen.</strong> Vergleichen Sie
+              SFTP-Hostschlüssel-Fingerabdrücke oder
+              FTPS-Zertifikatsinformationen mit einem Wert aus einem
+              unabhängigen, vertrauenswürdigen Kanal.
+            </li>
+            <li>
+              <strong>FTPS-Prüfung</strong> kontrolliert, ob das
+              Serverzertifikat vertrauenswürdig ist und zum Hostnamen passt.
+              Eine gespeicherte Ausnahme merkt sich den öffentlichen Schlüssel
+              des Zertifikats nur für diesen Host und Port. Sie ist nur für ein
+              zeitlich gültiges, selbstsigniertes Zertifikat erlaubt, dessen
+              einziges Problem ein fehlender vertrauenswürdiger Aussteller ist.
+              Ablauf, erkannter Widerruf, abweichende Hostnamen oder andere
+              Fehler bei der Zertifikatsprüfung werden dadurch nicht umgangen.
+            </li>
+            <li>
+              <strong>SFTP-Vertrauen</strong> ist an Host und Port gebunden.
+              Unbekannte Schlüssel können einmalig oder dauerhaft akzeptiert
+              werden. Ein geänderter Schlüssel bleibt gesperrt bis Sie ihn
+              ausdrücklich ersetzen.
+            </li>
+            <li>
+              <strong>Geheimnisse</strong> wie Passwörter und Passphrasen
+              privater Schlüssel werden niemals in der Einstellungsdatei oder im
+              Schnellverbindungsverlauf gespeichert. Gespeicherte Zugangsdaten
+              werden im Anmeldedatenspeicher des Betriebssystems aufbewahrt.
+            </li>
+            <li>
+              <strong>Interaktive Antworten</strong> wie TOTP-Codes werden nur
+              für den aktuellen Anmeldevorgang verwendet und niemals
+              gespeichert.
+            </li>
+            <li>
+              <strong>Diagnosemeldungen</strong> werden vor der Anzeige
+              bereinigt. Prüfen Sie trotzdem Pfade und Servermeldungen, bevor
+              Sie Bildschirmfotos oder Protokollauszüge weitergeben.
+            </li>
+            <li>
+              <strong>Pfadsicherheit</strong> weist Pfade zurück, die außerhalb
+              des gewählten Ziels liegen, sowie unsichere Dateinamen oder
+              Namenskonflikte.
+            </li>
+          </ul>
+        </section>
+
+        <section id="shortcuts">
+          <h2>Tastenkürzel</h2>
+          <p>
+            In dieser Hilfe steht <kbd>Strg/⌘</kbd> für <kbd>Strg</kbd> unter
+            Windows und Linux oder die Befehlstaste <kbd>⌘</kbd> (Command) unter
+            macOS. Die Anwendungsmenüs zeigen ihre Tastenkürzel ebenfalls an.
+          </p>
+          <table>
+            <caption>
+              Tastenkürzel und nützliche Tastaturaktionen
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Tasten</th>
+                <th scope="col">Aktion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Tasten"><kbd>Strg/⌘</kbd>+<kbd>T</kbd></td>
+                <td data-label="Aktion">Neuen Verbindungstab erstellen</td>
+              </tr>
+              <tr>
+                <td data-label="Tasten"><kbd>Strg/⌘</kbd>+<kbd>W</kbd></td>
+                <td data-label="Aktion">Aktuellen Verbindungstab schließen</td>
+              </tr>
+              <tr>
+                <td data-label="Tasten"><kbd>Strg/⌘</kbd>+<kbd>S</kbd></td>
+                <td data-label="Aktion">
+                  <a href="#saving-a-site">Servermanager öffnen</a>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Tasten"><kbd>Strg/⌘</kbd>+<kbd>,</kbd></td>
+                <td data-label="Aktion">
+                  <a href="#settings-history">Einstellungen öffnen</a>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Tasten"><kbd>F1</kbd></td>
+                <td data-label="Aktion">Diese Offline-Hilfe öffnen</td>
+              </tr>
+              <tr>
+                <td data-label="Tasten"><kbd>Strg/⌘</kbd>+<kbd>C</kbd></td>
+                <td data-label="Aktion">
+                  Markierte Übertragungen kopieren, während die Liste
+                  Warteschlange, Fehlgeschlagen oder Abgeschlossen den Fokus hat
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Tasten"><kbd>Strg/⌘</kbd>+<kbd>Einfg</kbd></td>
+                <td data-label="Aktion">
+                  Markierte Übertragungen kopieren (Alternative auf Tastaturen
+                  mit einer Einfg-Taste)
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Tasten"><kbd>Strg/⌘</kbd>+<kbd>A</kbd></td>
+                <td data-label="Aktion">
+                  Alle Einträge der fokussierten Übertragungsliste auswählen
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Tasten"><kbd>Entf</kbd></td>
+                <td data-label="Aktion">
+                  Markierte Elemente in der fokussierten lokalen oder entfernten
+                  Dateiliste nach Bestätigung löschen. Lokale Elemente kommen
+                  nach Möglichkeit in den Papierkorb und können andernfalls
+                  endgültig gelöscht werden. Entfernte Elemente werden endgültig
+                  gelöscht
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Tasten"><kbd>Eingabe</kbd></td>
+                <td data-label="Aktion">
+                  Vom Passwortfeld aus verbinden, zu einem eingegebenen Pfad
+                  wechseln oder das ausgewählte Browser-Element aktivieren
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            <kbd>Entf</kbd> bezeichnet das Vorwärtslöschen, nicht die Rücktaste.
+            Verwenden Sie auf kompakten Mac-Tastaturen
+            <kbd>Fn</kbd>+<kbd>Rücktaste</kbd>. Je nach Tastatureinstellung
+            benötigt auch <kbd>F1</kbd> die Zusatztaste <kbd>Fn</kbd>. Ist ein
+            Tastenkürzel nicht verfügbar, verwenden Sie die entsprechende
+            Schaltfläche oder Menüaktion.
+          </p>
+        </section>
+
+        <section id="configuration">
+          <h2>Konfigurationsdateien und Speicherorte</h2>
+          <p>
+            Einstellungen und Wiederherstellungsdaten werden für Ihr
+            Benutzerkonto gespeichert. Die Ordner für Konfiguration und lokale
+            Anwendungsdaten hängen vom Betriebssystem ab.
+          </p>
+          <table>
+            <caption>
+              Anwendungsdateien und Speicherorte
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Daten</th>
+                <th scope="col">Speicherort</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Daten">
+                  Anwendungseinstellungen und gespeicherte Server
+                </td>
+                <td data-label="Speicherort">
+                  <code>havRemote.cson</code> im Konfigurationsordner von
+                  havRemote
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Daten">
+                  <a href="#transfer-recovery"
+                    >Wiederherstellung nicht abgeschlossener und
+                    fehlgeschlagener Übertragungen</a
+                  >
+                </td>
+                <td data-label="Speicherort">
+                  <code>queue.cson</code> im selben Konfigurationsordner
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Daten">Vertrauenswürdige SFTP-Hostschlüssel</td>
+                <td data-label="Speicherort">
+                  <code>known_hosts</code> im selben Konfigurationsordner
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Daten">Passwörter und Schlüsselpassphrasen</td>
+                <td data-label="Speicherort">
+                  Anmeldedatenspeicher des Betriebssystems
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Daten">
+                  Arbeits- und Wiederherstellungskopien der entfernten
+                  Bearbeitung
+                </td>
+                <td data-label="Speicherort">
+                  Unterordner <code>edit</code> im lokalen Anwendungsdatenordner
+                  von havRemote
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Daten">Übersetzungen</td>
+                <td data-label="Speicherort">
+                  Der mit havRemote installierte Ordner
+                  <code>translations</code>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            Bei Konfigurationsfehlern und aufbewahrten Wiederherstellungskopien
+            entfernt bearbeiteter Dateien zeigt havRemote den jeweiligen
+            Dateipfad in der Meldung an.
+          </p>
+          <p>
+            Schließen Sie havRemote, bevor Sie die Einstellungsdatei von Hand
+            bearbeiten. Ihre Kommentare bleiben beim Speichern durch havRemote
+            erhalten.
+          </p>
+          <p class="warning">
+            <strong
+              >Werfen Sie eine gemeldete fehlerhafte Konfiguration nicht
+              unüberlegt weg.</strong
+            >
+            havRemote überschreibt keine fehlerhafte oder nicht unterstützte
+            Konfiguration. Korrigieren oder sichern und entfernen Sie die Datei
+            und starten Sie anschließend die Anwendung neu.
+          </p>
+        </section>
+
+        <section id="changelog">
+          <h2>Änderungsprotokoll</h2>
+          <h3>Version 0.1.0 - <time datetime="2026-09-17">2026-09-17</time></h3>
+          <ul>
+            <li>Erste Veröffentlichung</li>
+          </ul>
+        </section>
+
+        <section id="troubleshooting">
+          <h2>Problemlösung</h2>
+          <details>
+            <summary>Ich kann keine Verbindung herstellen</summary>
+            <ul>
+              <li>
+                Prüfen Sie Protokoll, Host und Port. Das Host-Feld darf kein
+                <code>ftp://</code>, <code>sftp://</code>, keinen Pfad und
+                keinen Port enthalten.
+              </li>
+              <li>
+                Prüfen Sie, ob der Server die gewählte
+                <a href="#connections">Anmeldeart</a> akzeptiert und seine
+                Firewall die Verbindung zulässt.
+              </li>
+              <li>
+                Ein FTP/FTPS-Server kann eine inaktive Sitzung trennen, während
+                die letzte Verzeichnisauflistung sichtbar bleibt. havRemote kann
+                die Verbindung beim nächsten Vorgang automatisch erneut
+                herstellen. Eine erfolgreiche Wiederverbindung erzeugt im
+                Meldungsprotokoll den Eintrag
+                <code>Reconnected to the FTP server</code> (erneut mit dem
+                FTP-Server verbunden). Schlägt der Vorgang fehl, meldet
+                havRemote den Fehler. havRemote sendet keine regelmäßigen
+                Befehle, nur um eine inaktive Sitzung offen zu halten.
+              </li>
+              <li>
+                Eine FTP-Antwort <code>530</code> bedeutet, dass die Anmeldung
+                abgelehnt wurde oder die Sitzung nicht mehr angemeldet ist. Das
+                kann auch geschehen, wenn eine Dateioperation eine neue
+                Verbindung benötigt. Prüfen Sie Ihre Anmeldedaten und die
+                Zugriffsregeln des Servers und verbinden Sie sich vor einem
+                erneuten Versuch neu.
+              </li>
+              <li>
+                Stellen Sie bei passivem FTP/FTPS sicher, dass die passiven
+                Datenports des Servers durch dessen Firewall und das Netzwerk
+                erreichbar sind. Diese Verbindungen werden über EPSV oder PASV
+                ausgehandelt.
+              </li>
+              <li>
+                Erlauben Sie bei
+                <a href="#connections">aktivem FTP/FTPS</a> eingehende
+                Datenverbindungen in Ihrer Firewall und prüfen Sie, ob der
+                Server Ihren Computer über die ausgewählte lokale Adresse
+                erreichen kann. Lassen Sie
+                <strong>Lokale Adresse im aktiven Modus (optional)</strong>
+                leer, sofern Sie keine andere, diesem Computer bereits
+                zugewiesene Adresse benötigen. Kann der Server keine lokale
+                Adresse direkt erreichen, verwenden Sie den passiven Modus.
+              </li>
+              <li>
+                Testen Sie aktives FTP/FTPS, indem Sie ein Verzeichnis
+                auflisten, eine Datei herunterladen und eine Datei hochladen.
+                Diese Vorgänge verwenden die Datenverbindung, das Umbenennen
+                dagegen nicht. Eine FTP-Antwort <code>550</code> beim Umbenennen
+                weist auf ein Problem mit der Dateioperation hin, etwa dem Pfad
+                oder den Zugriffsrechten, nicht auf einen Fehler der
+                Datenverbindung im aktiven Modus.
+              </li>
+              <li>
+                Lesen Sie die vollständige Fehlermeldung im Protokoll,
+                einschließlich Erklärung, FTP-Antwort und Clientfehlercode (als
+                <code>CURLcode</code> angezeigt). Serverantworten und
+                Clientfehlercodes sind unterschiedliche Angaben: FTP-Antwort
+                <code>550</code> ist nicht dasselbe wie
+                <code>CURLcode 55</code>. Die zuletzt empfangene FTP-Antwort
+                allein erklärt den Fehler möglicherweise nicht. Geben Sie beim
+                Melden eines Problems die vollständige Nachricht an, prüfen Sie
+                aber Namen, Pfade und Servermeldungen vor dem Weitergeben.
+              </li>
+              <li>
+                Eine <strong>DEBUG</strong>-Meldung bedeutet nicht zwangsläufig,
+                dass eine Aktion fehlgeschlagen ist. Sie kann einen vom Server
+                nicht unterstützten Befehl beschreiben, für den havRemote
+                anschließend erfolgreich eine Alternative verwendet hat.
+                Fehlgeschlagene Aktionen werden separat mit einer Erklärung des
+                Problems gemeldet.
+              </li>
+              <li>
+                Bei Problemen im aktiven Modus zeigen Debug-Meldungen außerdem
+                die lokale Adresse und den Empfangsport, soweit verfügbar, sowie
+                Einzelheiten zu Fehlern beim Verbindungsaufbau. Damit können Sie
+                oder der Serveradministrator die Erreichbarkeit und
+                Firewall-Regeln prüfen.
+              </li>
+            </ul>
+          </details>
+          <details>
+            <summary>Eine entfernte SFTP-Operation schlägt fehl</summary>
+            <p>
+              Sofern verfügbar, enthält die Diagnose den Statusnamen und die
+              Statusnummer des Servers, etwa
+              <code>Permission denied (SFTP status 3)</code> für verweigerten
+              Zugriff oder <code>No such file (SFTP status 2)</code> für eine
+              nicht vorhandene Datei. Diese Angaben beschreiben einen Fehler bei
+              einer Dateioperation, kein abgelehntes Passwort. Ein allgemeines
+              <code>Failure (SFTP status 4)</code> nennt keine genaue Ursache.
+              Prüfen Sie Pfad, Berechtigungen, freien Speicherplatz und die
+              Serverprotokolle oder fragen Sie den Administrator. Anmelde- und
+              Verbindungsfehler werden separat gemeldet.
+            </p>
+          </details>
+          <details>
+            <summary>
+              Ein Zertifikat oder SFTP-Hostschlüssel hat sich geändert
+            </summary>
+            <p>
+              Akzeptieren Sie die <a href="#security">neue Identität</a> erst,
+              nachdem der Serveradministrator sie über einen unabhängigen,
+              vertrauenswürdigen Kanal bestätigt hat. Eine geänderte Identität
+              kann durch berechtigte Serverwartung entstehen, aber auch auf
+              einen Abfangversuch oder unerwarteten Endpunkt hindeuten.
+            </p>
+          </details>
+          <details>
+            <summary>
+              Besitzer/Gruppe oder Berechtigungen sind in der Serverliste leer
+            </summary>
+            <p>
+              Der Server oder das verwendete Listenformat hat diese Metadaten
+              nicht geliefert. Aktualisieren Sie das Verzeichnis nach
+              vollständigem Verbindungsaufbau. Bleiben die Werte leer, weist das
+              nicht zwangsläufig auf einen Fehler hin.
+            </p>
+          </details>
+          <details>
+            <summary>
+              Pause, Abbrechen oder Erneut versuchen ist deaktiviert
+            </summary>
+            <p>
+              Markieren Sie eine Übertragung in der passenden
+              <a href="#queue-actions"
+                >Ansicht Warteschlange, Fehlgeschlagen oder Abgeschlossen</a
+              >. Eine Aktion ist nur in Zuständen verfügbar, in denen sie sicher
+              ausgeführt werden kann. Wählen Sie für
+              <a href="#transfer-recovery">wiederhergestellte Arbeit</a> den
+              zugehörigen Verbindungstab und verbinden Sie sich erneut mit dem
+              ursprünglichen Server und exakt gleichen Endpunkt, bevor Sie
+              <strong>Erneut versuchen</strong> verwenden.
+            </p>
+          </details>
+          <details>
+            <summary>Fortsetzen wird nicht angeboten</summary>
+            <p>
+              Die Metadaten von Quelle, Ziel oder Teildatei stimmen nicht mehr
+              mit der aufgezeichneten Übertragung überein. Die erforderlichen
+              Prüfungen beschreibt
+              <a href="#safe-resume">Teildateien und sicheres Fortsetzen</a>.
+              Verwenden Sie Überschreiben, Umbenennen oder Überspringen, statt
+              an eine ungeprüfte Datei anzuhängen.
+            </p>
+          </details>
+          <details>
+            <summary>
+              Eine extern bearbeitete Datei wurde nicht hochgeladen
+            </summary>
+            <p>
+              Lassen Sie havRemote, den zugehörigen Verbindungstab und die
+              Serververbindung während der Bearbeitung geöffnet. Prüfen Sie
+              <a href="#queue-actions">Warteschlange</a> und Meldungsprotokoll.
+              Steht der Upload unter <strong>Fehlgeschlagen</strong>, beheben
+              Sie das Problem und verbinden Sie sich bei Bedarf erneut mit dem
+              ursprünglichen Server und Endpunkt. Markieren Sie anschließend den
+              Eintrag und wählen Sie <strong>Erneut versuchen</strong>. Ist kein
+              wiederholbarer Eintrag mehr vorhanden, verwenden Sie die gemeldete
+              Wiederherstellungskopie und laden Sie sie manuell hoch. Den
+              Speicherort finden Sie unter
+              <a href="#configuration">Konfigurationsdateien und Speicherorte</a
+              >.
+            </p>
+          </details>
+          <details>
+            <summary>Das Design wurde nicht sofort geändert</summary>
+            <p>
+              <a href="#settings-history">Designänderungen</a> erfordern einen
+              Neustart der Anwendung. Änderungen an Sprache und externem Editor
+              werden sofort angewendet.
+            </p>
+          </details>
+          <details>
+            <summary>Die Suche nach Updates schlägt fehl</summary>
+            <p>
+              Prüfen Sie, ob der HTTPS-Zugriff auf GitHub verfügbar ist und
+              nicht von einer Firewall oder einem Proxy blockiert wird, und
+              starten Sie anschließend erneut eine
+              <a href="#updates">manuelle Suche</a>. Fehler bei einer
+              automatischen Suche werden ohne Dialog in das Meldungsprotokoll
+              geschrieben. havRemote benötigt weder eine GitHub-Anmeldung noch
+              ein Zugriffstoken.
+            </p>
+          </details>
+          <details>
+            <summary>
+              Beim Start wird eine ungültige Konfiguration gemeldet
+            </summary>
+            <p>
+              Notieren Sie Dateiname, Zeile und Spalte aus der Fehlermeldung.
+              Schließen Sie havRemote, erstellen Sie eine Sicherung, korrigieren
+              oder entfernen Sie die
+              <a href="#configuration">fehlerhafte Datei</a> und starten Sie
+              neu.
+            </p>
+          </details>
+        </section>
+      </main>
+    </div>
+
+    <a class="back-to-top" href="#top" aria-label="Nach oben" title="Nach oben">
+      <span aria-hidden="true">↑</span>
+    </a>
+
+    <footer>
+      <div>
+        Copyright © 2026 René Nicolaus · <a href="../LICENSE.txt">MIT-Lizenz</a>
+      </div>
+      <div>
+        <a href="https://havoc.de">Website</a> ·
+        <a href="https://github.com/Havoc7891/havRemote">Quellcode</a> ·
+        <a href="mailto:havremote@havoc.de" title="havremote@havoc.de">E-Mail</a>
+      </div>
+    </footer>
+  </body>
+</html>

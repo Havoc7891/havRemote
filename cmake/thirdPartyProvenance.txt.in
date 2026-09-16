@@ -1,0 +1,47 @@
+havRemote @PROJECT_VERSION@ third-party build provenance
+
+Configured Git refs and exact commits resolved for this binary at configure time.
+
+Runtime source dependencies
+
+wxWidgets
+  repository: https://github.com/wxWidgets/wxWidgets.git
+  configured ref: @HAVREMOTE_WXWIDGETS_REF@
+  resolved commit: @HAVREMOTE_WXWIDGETS_COMMIT@
+
+curl
+  repository: https://github.com/curl/curl.git
+  configured ref: @HAVREMOTE_CURL_REF@
+  resolved commit: @HAVREMOTE_CURL_COMMIT@
+
+libssh2
+  repository: https://github.com/libssh2/libssh2.git
+  configured ref: @HAVREMOTE_LIBSSH2_REF@
+  resolved commit: @HAVREMOTE_LIBSSH2_COMMIT@
+
+LibreSSL portable
+  repository: https://github.com/libressl/portable.git
+  configured ref: @HAVREMOTE_LIBRESSL_REF@
+  resolved commit: @HAVREMOTE_LIBRESSL_COMMIT@
+  generated version: @HAVREMOTE_LIBRESSL_VERSION@
+  imported OpenBSD commit: @HAVREMOTE_LIBRESSL_OPENBSD_COMMIT@
+
+havCSON
+  repository: https://github.com/Havoc7891/havCSON.git
+  configured ref: @HAVREMOTE_HAVCSON_REF@
+  resolved commit: @HAVREMOTE_HAVCSON_COMMIT@
+
+Test dependency
+
+Catch2
+  repository: https://github.com/catchorg/Catch2.git
+  configured ref: @HAVREMOTE_CATCH2_REF@
+  resolved commit: @HAVREMOTE_CATCH2_COMMIT@
+
+Build toolchain
+
+  CMake: @CMAKE_VERSION@
+  generator: @CMAKE_GENERATOR@
+  C compiler: @CMAKE_C_COMPILER_ID@ @CMAKE_C_COMPILER_VERSION@
+  C++ compiler: @CMAKE_CXX_COMPILER_ID@ @CMAKE_CXX_COMPILER_VERSION@
+  compiler target: @HAVREMOTE_COMPILER_TARGET@

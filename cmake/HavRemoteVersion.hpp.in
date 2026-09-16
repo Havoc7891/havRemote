@@ -1,0 +1,17 @@
+// SPDX-License-Identifier: MIT
+
+#ifndef HAVREMOTE_CMAKE_HAV_REMOTE_VERSION_HPP_IN
+#define HAVREMOTE_CMAKE_HAV_REMOTE_VERSION_HPP_IN
+
+#include <string_view>
+
+namespace havremote
+{
+  inline constexpr std::string_view ApplicationVersion{"@PROJECT_VERSION@"};
+  inline constexpr std::string_view UpdateRepositoryOwner{
+      "@HAVREMOTE_UPDATE_REPOSITORY_OWNER@"};
+  inline constexpr std::string_view UpdateRepositoryName{
+      "@HAVREMOTE_UPDATE_REPOSITORY_NAME@"};
+} // namespace havremote
+
+#endif // HAVREMOTE_CMAKE_HAV_REMOTE_VERSION_HPP_IN

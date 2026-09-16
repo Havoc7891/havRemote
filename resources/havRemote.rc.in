@@ -1,0 +1,64 @@
+// SPDX-License-Identifier: MIT
+
+#include <windows.h>
+
+// This name sorts before wxICON_AAA in the PE resource table, which makes the
+// custom multi-size icon the executable icon selected by Windows Explorer.
+HAVREMOTE_APP_ICON ICON "@HAVREMOTE_ICON_PATH@"
+
+HAVREMOTE_CLEAR_ICON RCDATA "@HAVREMOTE_RESOURCE_PATH@/clear.png"
+HAVREMOTE_CLEAR_HISTORY_ICON RCDATA "@HAVREMOTE_RESOURCE_PATH@/clearhistory.png"
+HAVREMOTE_CONNECT_ICON RCDATA "@HAVREMOTE_RESOURCE_PATH@/connect.png"
+HAVREMOTE_DISCONNECT_ICON RCDATA "@HAVREMOTE_RESOURCE_PATH@/disconnect.png"
+HAVREMOTE_DOWNLOAD_ICON RCDATA "@HAVREMOTE_RESOURCE_PATH@/download.png"
+HAVREMOTE_FILE_LIST_FILE_ICON RCDATA "@HAVREMOTE_RESOURCE_PATH@/file.png"
+HAVREMOTE_FILE_LIST_FOLDER_ICON RCDATA "@HAVREMOTE_RESOURCE_PATH@/folder.png"
+HAVREMOTE_FILE_LIST_SYMLINK_ICON RCDATA "@HAVREMOTE_RESOURCE_PATH@/symlink.png"
+HAVREMOTE_FILE_LIST_UNKNOWN_ICON RCDATA "@HAVREMOTE_RESOURCE_PATH@/unknown.png"
+HAVREMOTE_HISTORY_ICON RCDATA "@HAVREMOTE_RESOURCE_PATH@/history.png"
+HAVREMOTE_NEW_CONNECTION_ICON RCDATA "@HAVREMOTE_RESOURCE_PATH@/plus.png"
+HAVREMOTE_REFRESH_ICON RCDATA "@HAVREMOTE_RESOURCE_PATH@/refresh.png"
+HAVREMOTE_SITE_MANAGER_ICON RCDATA "@HAVREMOTE_RESOURCE_PATH@/sitemanager.png"
+HAVREMOTE_UP_ICON RCDATA "@HAVREMOTE_RESOURCE_PATH@/up.png"
+HAVREMOTE_UPLOAD_ICON RCDATA "@HAVREMOTE_RESOURCE_PATH@/upload.png"
+
+// wxWidgets requires its standard MSW resources in every application resource
+// script. havRemote provides its application manifest below, so suppress only
+// the manifest supplied by wx.rc to avoid defining RT_MANIFEST resource 1 twice.
+#define wxUSE_NO_MANIFEST 1
+#include "wx/msw/wx.rc"
+
+1 RT_MANIFEST "@HAVREMOTE_MANIFEST_PATH@"
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION @PROJECT_VERSION_MAJOR@,@PROJECT_VERSION_MINOR@,@PROJECT_VERSION_PATCH@,0
+ PRODUCTVERSION @PROJECT_VERSION_MAJOR@,@PROJECT_VERSION_MINOR@,@PROJECT_VERSION_PATCH@,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS VS_FF_DEBUG
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS VOS_NT_WINDOWS32
+ FILETYPE VFT_APP
+ FILESUBTYPE 0x0L
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904b0"
+    BEGIN
+      VALUE "CompanyName", "Ren\351 Nicolaus\0"
+      VALUE "FileDescription", "havRemote remote file access and transfer\0"
+      VALUE "FileVersion", "@PROJECT_VERSION@\0"
+      VALUE "InternalName", "havRemote\0"
+      VALUE "LegalCopyright", "Copyright \251 2026 Ren\351 Nicolaus\0"
+      VALUE "OriginalFilename", "havRemote.exe\0"
+      VALUE "ProductName", "havRemote\0"
+      VALUE "ProductVersion", "@PROJECT_VERSION@\0"
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x0409, 1200
+  END
+END

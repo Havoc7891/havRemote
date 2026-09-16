@@ -1,0 +1,5 @@
+// SPDX-License-Identifier: MIT
+
+#include <windows.h>
+
+1 RT_MANIFEST "@HAVREMOTE_TEST_MANIFEST_PATH@"

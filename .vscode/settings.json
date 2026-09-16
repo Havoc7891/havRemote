@@ -1,0 +1,20 @@
+{
+  "cmake.useCMakePresets": "always",
+  "cmake.useVsDeveloperEnvironment": "never",
+  "cmake.configureOnOpen": false,
+  "cmake.buildBeforeRun": true,
+  "cmake.debugConfig": {
+    "cwd": "${workspaceFolder}",
+    "externalConsole": false,
+    "avoidWindowsConsoleRedirection": true,
+    "stopAtEntry": false,
+    "setupCommands": [
+      {
+        "description": "Enable GDB pretty-printing",
+        "text": "-enable-pretty-printing",
+        "ignoreFailures": true
+      }
+    ]
+  },
+  "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
+}

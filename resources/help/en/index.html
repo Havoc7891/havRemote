@@ -1,0 +1,1225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="author" content="René Nicolaus" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>havRemote Help</title>
+    <link rel="icon" href="../../icons/havRemote.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../help.css" />
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#content">Skip to the help content</a>
+
+    <header>
+      <div class="hero">
+        <img
+          src="../../icons/havRemote.png"
+          width="512"
+          height="512"
+          alt="havRemote logo" />
+        <div>
+          <h1>havRemote Help</h1>
+          <p class="version">Version @HAVREMOTE_HELP_VERSION@</p>
+          <p class="tagline">
+            Browse, manage, and transfer files between your computer and remote
+            systems.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <nav aria-label="Help contents">
+        <h2>Contents</h2>
+        <ol>
+          <li><a href="#getting-started">Getting started</a></li>
+          <li><a href="#connections">Connections and authentication</a></li>
+          <li><a href="#tabs">Connection tabs</a></li>
+          <li><a href="#browsers">File browsers</a></li>
+          <li><a href="#transfers">Transfers and conflicts</a></li>
+          <li>
+            <a href="#file-operations">File operations and permissions</a>
+          </li>
+          <li><a href="#external-editing">External editing</a></li>
+          <li><a href="#settings-history">Settings and history</a></li>
+          <li><a href="#updates">Updates</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#shortcuts">Keyboard shortcuts</a></li>
+          <li><a href="#configuration">Configuration files</a></li>
+          <li><a href="#changelog">Changelog</a></li>
+          <li><a href="#troubleshooting">Troubleshooting</a></li>
+        </ol>
+      </nav>
+
+      <main id="content">
+        <section id="getting-started">
+          <h2>Getting started</h2>
+          <ol>
+            <li>
+              On first launch, use the empty connection tab. Later launches
+              restore your previous tabs without reconnecting automatically.
+              Press <kbd>Ctrl/⌘</kbd>+<kbd>T</kbd> whenever you need a new one.
+            </li>
+            <li>
+              In <strong>Quick Connect</strong>, choose a protocol and enter the
+              host, port, username, and password. Enter only a host name or IP
+              address - do not include a URL scheme, port, path, or username in
+              the Host field. New FTP and FTPS connections entered directly in
+              Quick Connect use passive mode. To use active mode,
+              <a href="#saving-a-site"
+                >configure a saved site in <strong>Site Manager</strong></a
+              >.
+            </li>
+            <li>
+              Select <strong>Connect</strong>.
+              <a href="#security">Verify any certificate or host-key prompt</a>
+              before accepting it.
+            </li>
+            <li>
+              Choose a local directory on the left and browse to the destination
+              directory on the right.
+            </li>
+            <li>
+              Select files or directories, then use <strong>Upload</strong> or
+              <strong>Download</strong>. Follow progress in the
+              <a href="#queue-actions">transfer area</a> at the bottom of the
+              window.
+            </li>
+          </ol>
+          <p class="note">
+            <strong>Tip:</strong> Use the <strong>Site Manager</strong> for
+            private keys, SSH agent or keyboard-interactive authentication,
+            initial directories, FTP encoding, FTP data-connection mode, and
+            connections you use regularly.
+          </p>
+        </section>
+
+        <section id="connections">
+          <h2>Connections and authentication</h2>
+          <table>
+            <caption>
+              Available connection types
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Protocol</th>
+                <th scope="col">Typical port</th>
+                <th scope="col">Protection</th>
+                <th scope="col">Authentication</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Protocol">FTP</td>
+                <td data-label="Typical port">21</td>
+                <td data-label="Protection">None</td>
+                <td data-label="Authentication">Password</td>
+              </tr>
+              <tr>
+                <td data-label="Protocol">Explicit FTPS</td>
+                <td data-label="Typical port">21</td>
+                <td data-label="Protection">TLS starts after connecting</td>
+                <td data-label="Authentication">Password</td>
+              </tr>
+              <tr>
+                <td data-label="Protocol">Implicit FTPS</td>
+                <td data-label="Typical port">990</td>
+                <td data-label="Protection">TLS starts immediately</td>
+                <td data-label="Authentication">Password</td>
+              </tr>
+              <tr>
+                <td data-label="Protocol">SFTP</td>
+                <td data-label="Typical port">22</td>
+                <td data-label="Protection">SSH</td>
+                <td data-label="Authentication">
+                  Password, private key, SSH agent, keyboard-interactive, or
+                  password + keyboard-interactive
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            The displayed port changes to the usual default when you select a
+            protocol, but the server may use a different port. New, unsaved
+            Quick Connect connections use password authentication. For the other
+            SFTP methods, <a href="#saving-a-site">create a saved site</a>.
+            Reconnecting a saved-site tab with unchanged connection details
+            keeps its saved authentication method and FTP data-connection mode.
+          </p>
+          <p>
+            New, unsaved FTP and FTPS connections use passive mode, which is
+            recommended for most connections. A saved FTP or FTPS site can
+            instead select <strong>Active</strong>. In passive mode, havRemote
+            opens the data connection to the server. In active mode, the server
+            connects back to your computer, so your firewall and network must
+            allow incoming connections. By default, havRemote uses the same
+            local address it used to connect to the server and a temporary port
+            selected by the operating system.
+          </p>
+          <p>
+            <strong>Active mode local address (optional)</strong> lets you
+            choose a different IPv4 or IPv6 address already assigned to this
+            computer. Leave it blank for automatic selection. This can be useful
+            with a VPN or multiple network connections, but the server must be
+            able to reach the chosen address. havRemote uses it both to receive
+            the incoming connection and to tell the server where to connect. It
+            cannot listen on one address while announcing another, such as a
+            router's public address. Do not include brackets, a port, a
+            hostname, or URL syntax.
+          </p>
+          <p>
+            Choose <strong>Keyboard-interactive</strong> when the server
+            provides all of its prompts directly. One exchange may ask for both
+            a password and a TOTP code. Choose
+            <strong>Password + keyboard-interactive</strong> when the server
+            accepts the account password first and only then offers another
+            prompt, commonly for TOTP. The initial password can be saved, but
+            answers to keyboard-interactive prompts are used only for the
+            current connection.
+          </p>
+          <p>
+            <strong>Private key</strong> reads the selected key file directly
+            and does not use an SSH agent. <strong>SSH agent</strong> uses keys
+            provided by a running, compatible SSH agent. If no key is accepted,
+            havRemote does not silently switch to another agent or
+            authentication method.
+          </p>
+          <p class="note">
+            <strong>Tip:</strong> SSH agent authentication requires a running
+            agent with your private key loaded. havRemote does not start an
+            agent automatically.
+          </p>
+          <details>
+            <summary>SSH agent selection by operating system</summary>
+            <ul>
+              <li>
+                <strong>Windows:</strong> havRemote uses Pageant when it is
+                running. Otherwise, it tries the Windows OpenSSH agent.
+              </li>
+              <li>
+                <strong>Linux and macOS:</strong> The OpenSSH-compatible agent
+                is identified by the <code>SSH_AUTH_SOCK</code> environment
+                variable inherited by havRemote.
+              </li>
+            </ul>
+          </details>
+          <p>
+            An SFTP <strong>server host-key fingerprint</strong> identifies the
+            server and is the value to verify in a
+            <a href="#security">trust prompt</a>. A
+            <strong>client identity fingerprint</strong> reported after agent
+            authentication identifies the key the server accepted from you.
+            These fingerprints represent opposite sides of the connection and
+            normally do not match.
+          </p>
+
+          <h3 id="saving-a-site">Saving a site</h3>
+          <ol>
+            <li>
+              Open <strong>File → Site Manager</strong> or press
+              <kbd>Ctrl/⌘</kbd>+<kbd>S</kbd>.
+            </li>
+            <li>
+              Select <strong>New site</strong>, give it a recognizable name, and
+              choose the protocol.
+            </li>
+            <li>
+              Enter the endpoint and authentication information. You may also
+              choose initial local and remote directories and, for FTP or FTPS,
+              the data-connection mode and optional active-mode local-address
+              override.
+            </li>
+            <li>
+              Select <strong>OK</strong> to save your changes, or
+              <strong>Connect</strong> to save and connect to the selected site.
+              <strong>Cancel</strong> discards your changes.
+            </li>
+          </ol>
+          <p>
+            Use <strong>New folder</strong> to build a nested folder structure.
+            Drag sites or folders above or below another entry to reorder them,
+            onto the middle of a folder to move them into it, or onto blank
+            space to move them to the root. Sites and folders can be mixed in
+            any order. <strong>Duplicate</strong> copies a selected site or
+            recursively copies a selected folder with all of its subfolders and
+            sites. Saved passwords and key passphrases are not shared with any
+            copy. Enter them separately when needed.
+          </p>
+          <p>
+            Sites and folders must have distinct names within the same folder
+            (including the top level), but names can be reused in different
+            folders. When you duplicate a folder, names inside the copy stay
+            unchanged.
+          </p>
+          <p>
+            Deleting a Site Manager folder removes that folder and all of its
+            nested saved folders and sites. The change is committed only when
+            you save with <strong>OK</strong> or <strong>Connect</strong>. It
+            never deletes files or directories from a remote server.
+          </p>
+          <p>
+            Select a site and choose <strong>Connect</strong> in the Site
+            Manager, or open a saved site from the arrow beside its main-window
+            button. Connect is unavailable when a folder or no entry is
+            selected. havRemote reuses a pristine current tab when possible.
+            Otherwise, an <a href="#tabs">existing tab</a> for the same saved
+            site is activated and reconnected if necessary. A new tab is opened
+            only when no matching tab is available.
+          </p>
+
+          <h3>Importing and exporting sites</h3>
+          <p>
+            In Site Manager, choose <strong>Export...</strong> to export the
+            selected site, a selected folder with all its contents, or all
+            entries to a <code>.cson</code> file. The current edited settings
+            are exported without saving the Site Manager dialog. Folder
+            structure and ordering are preserved.
+          </p>
+          <p>
+            Choose <strong>Import...</strong> to load a havRemote site export
+            into the selected folder, beside a selected site, or at the top
+            level when nothing is selected. Review the preview before importing.
+            Existing entries are kept. Conflicting names are shown as renamed
+            copies for your confirmation. Use <strong>OK</strong> or
+            <strong>Connect</strong> to save the imported entries.
+            <strong>Cancel</strong> in Site Manager discards the changes.
+          </p>
+          <p>
+            Exports exclude passwords, credential identifiers, trust records,
+            key files and their local paths, local starting folders, and
+            active-mode local-address overrides. Imported private-key sites need
+            a local key file selected before saving or connecting. Enter other
+            missing credentials as needed and verify server trust normally.
+            Server names, usernames, and remote paths are still private
+            metadata, so review a file before sharing it.
+          </p>
+
+          <h3>Disconnecting</h3>
+          <p>
+            During an active connection, the <strong>Connect</strong> button
+            becomes <strong>Disconnect</strong>. Disconnecting leaves the tab
+            and its local browser open. Transfers or externally edited files
+            associated with the connection may require confirmation before the
+            connection or tab can be closed.
+          </p>
+        </section>
+
+        <section id="tabs">
+          <h2>Connection tabs</h2>
+          <p>
+            Every tab owns its connection, local browser, remote browser, and
+            remembered directory pair. Switching tabs restores that tab's Quick
+            Connect fields and both file views, so you do not need to navigate
+            the local browser again for each server.
+          </p>
+          <ul>
+            <li>
+              Create a tab with the plus button or
+              <kbd>Ctrl/⌘</kbd>+<kbd>T</kbd>.
+            </li>
+            <li>
+              Close the current tab with its close button, a middle-click, or
+              <kbd>Ctrl/⌘</kbd>+<kbd>W</kbd>.
+            </li>
+            <li>Drag tabs to reorder them.</li>
+            <li>A new, empty tab starts with SFTP selected.</li>
+          </ul>
+          <p>
+            When havRemote starts again, it restores the open tabs in their
+            previous order and selects the tab that was active when the
+            application closed. Saved-site and Quick Connect identities and both
+            browser locations are restored, but connections remain disconnected
+            and secrets are never written into the workspace state. Reconnect
+            each tab when you need it.
+          </p>
+          <p>
+            The <a href="#queue-actions">queue</a> and message log cover all
+            tabs. The <strong>Connection</strong> column identifies the tab that
+            owns each transfer. Use the Clear button beside the message-log
+            heading to discard the currently displayed messages.
+          </p>
+        </section>
+
+        <section id="browsers">
+          <h2>File browsers</h2>
+          <p>
+            The left browser shows local files, and the right browser shows the
+            active server. Use the path control, <strong>Up</strong>,
+            <strong>Refresh</strong>, or the <code>..</code> entry to navigate.
+            Press <kbd>Enter</kbd> after typing a path. Activating a directory
+            opens it. Activating a regular file queues an upload or download.
+          </p>
+          <ul>
+            <li>
+              Click a column heading to sort. Click it again to reverse the
+              direction. Drag a heading divider to resize a column. Local and
+              remote sort choices and column widths are remembered separately,
+              and the same layout is used in every connection tab.
+            </li>
+            <li>
+              The <strong>Type</strong> column identifies regular files by their
+              final extension, such as <strong>TXT file</strong> or
+              <strong>GZ file</strong> for <code>archive.tar.gz</code>. Files
+              without an extension, including <code>.gitignore</code>, remain
+              <strong>File</strong>. Sorting by Type groups files by extension
+              regardless of case, then by name. Folders and <code>..</code> stay
+              at the top in either direction.
+            </li>
+            <li>
+              Open a selection's context menu with a secondary click, or
+              <kbd>Control</kbd>-click on macOS, to access the available upload
+              or download, editing, rename, deletion, creation, permission, and
+              refresh actions. On Windows and Linux, you can also use the
+              context-menu key or <kbd>Shift</kbd>+<kbd>F10</kbd>.
+            </li>
+            <li>
+              Drag selected local items to the remote list to upload them, or
+              selected remote items to the local list to download them. These
+              in-app drops work between the two lists in the same connection tab
+              and use the currently displayed destination directory. You can
+              also drop files or directories from your file manager onto a
+              connected remote list to upload them.
+            </li>
+            <li>
+              The remote list can show
+              <a href="#remote-permissions">permissions</a> and owner/group data
+              when the server reports them. An empty value usually means that
+              the protocol or server did not supply it.
+            </li>
+            <li>
+              Symlinks are shown as links but are never followed during
+              recursive transfers.
+            </li>
+            <li>
+              Use <strong>Refresh</strong> when another program or server-side
+              process may have changed the directory. havRemote also refreshes a
+              visible local destination after a download and a visible remote
+              destination after an upload.
+            </li>
+          </ul>
+        </section>
+
+        <section id="transfers">
+          <h2>Transfers, conflicts, and resume</h2>
+          <h3>Starting a transfer</h3>
+          <p>
+            Select one or more local items and choose <strong>Upload</strong>,
+            or select remote items and choose <strong>Download</strong>.
+            Directories are enumerated and transferred recursively. Files from
+            different connection tabs share the same queue and the
+            <a href="#transfer-settings"
+              >configured limit on simultaneous transfers</a
+            >.
+          </p>
+
+          <h3 id="queue-actions">Queue views and actions</h3>
+          <p>
+            The context menu offers the same actions as the buttons, with the
+            same availability, plus <strong>Copy all</strong>.
+          </p>
+          <ul>
+            <li>
+              <strong>Queue</strong> contains waiting, enumerating, running, and
+              paused work.
+            </li>
+            <li>
+              <strong>Failed</strong> contains transfers that ended with an
+              error or were canceled.
+            </li>
+            <li>
+              <strong>Completed</strong> contains successfully finished work.
+            </li>
+            <li>
+              <strong>Pause</strong>, <strong>Cancel</strong>, and
+              <strong>Retry</strong> require exactly one selected transfer that
+              supports the action. They are disabled when multiple entries are
+              selected.
+            </li>
+            <li>
+              <strong>Remove</strong> requires exactly one selected completed,
+              failed, or canceled entry and deletes it from the queue records.
+              Removing a failed transfer asks for confirmation because it
+              discards that transfer's retry and recovery information.
+            </li>
+            <li>
+              <strong>Clear</strong> removes every entry in the current Failed
+              or Completed view. Clearing failed transfers gives the same
+              warning. Partial local and temporary remote files are left in
+              place for safety.
+            </li>
+            <li>
+              <strong>Copy</strong> copies selected entries in any of the three
+              views. Use the Copy button, the context-menu action, or
+              <kbd>Ctrl/⌘</kbd>+<kbd>C</kbd> while the transfer list has focus.
+              Select multiple entries with <kbd>Ctrl/⌘</kbd> or
+              <kbd>Shift</kbd>, or press <kbd>Ctrl/⌘</kbd>+<kbd>A</kbd> to
+              select every entry in the focused list.
+            </li>
+            <li>
+              <strong>Copy all</strong> in the context menu copies the entire
+              current view. Copy is enabled only with a selection. Copy all is
+              enabled whenever the view is not empty.
+            </li>
+          </ul>
+          <p>
+            Copied transfers are tab-separated plain text with localized column
+            headers, every displayed column, and full error details. Copying
+            does not requeue transfers or change their state.
+          </p>
+          <p>
+            Use <strong>Export... → Export selected...</strong> or
+            <strong>Export all...</strong> on the button row or context menu to
+            save a <code>.csv</code> report from any transfer view. The report
+            captures the rows before the save dialog opens, with translated
+            headings, the current column order, and full error details.
+            Selection export requires selected rows. Whole-view export requires
+            a nonempty view. Reports do not change transfers and cannot be
+            imported to restore a queue. Only entries still present in the view
+            can be exported.
+          </p>
+          <p>
+            CSV reports use UTF-8 and comma-separated quoted fields. When
+            opening one in a spreadsheet, choose UTF-8 and comma as the
+            delimiter if needed. Secrets and control characters are sanitized,
+            and formula-like text is prefixed with an apostrophe. Existing files
+            require overwrite confirmation. Application configuration, transfer
+            recovery, and trusted-host files cannot be replaced by an export.
+          </p>
+          <p>
+            The <strong>Speed</strong> and <strong>ETA</strong> columns show a
+            live average for running file transfers. ETA is available only when
+            the total size is known. Paused, waiting, terminal, and
+            directory-enumeration entries leave these fields blank.
+          </p>
+          <p>
+            Failed uploads and downloads add an Error entry to the message log
+            and show an error dialog with the connection, transfer direction,
+            remote path, and error. Failures that occur close together are
+            grouped in one notification. The transfers remain in
+            <strong>Failed</strong>. After resolving the problem, select an
+            entry and choose <strong>Retry</strong>. Pausing or canceling a
+            transfer does not trigger this error reporting, and failures
+            restored when starting havRemote do not trigger it again.
+          </p>
+          <p>
+            FTP/FTPS uploads report insufficient storage or an exceeded quota
+            when the server supplies that reason. If the connection fails before
+            a final reply is available, havRemote may only be able to report an
+            interrupted connection. Ask the server administrator to check the
+            server logs if the cause is unclear. Partial uploads are kept so you
+            can retry or <a href="#safe-resume">resume safely</a> after
+            resolving the problem.
+          </p>
+          <p>
+            A server may have completed a final operation even when the reply
+            was lost. havRemote does not silently repeat destructive work with
+            an uncertain outcome. Inspect the destination before confirming a
+            retry.
+          </p>
+
+          <h3 id="destination-conflicts">Destination conflicts</h3>
+          <p>
+            With <strong>Ask</strong>, the initial default policy, havRemote
+            offers the choices that are safe for that transfer:
+          </p>
+          <ul>
+            <li><strong>Overwrite</strong> replaces the destination.</li>
+            <li><strong>Skip</strong> leaves the destination unchanged.</li>
+            <li>
+              <strong>Rename</strong> transfers the incoming item under another
+              name.
+            </li>
+            <li>
+              <a href="#safe-resume"><strong>Resume</strong></a> continues a
+              verified partial transfer.
+            </li>
+          </ul>
+          <p>
+            You may apply a choice to remaining queue conflicts. A
+            safety-sensitive conflict, such as a remote file changing during
+            <a href="#external-editing">external editing</a>, is always handled
+            individually.
+          </p>
+          <p>
+            When you rename an incoming file, havRemote remembers the chosen
+            destination for retries, including after restarting the application.
+            For directory transfers, it remembers each file's chosen name
+            separately. Resume information stays attached to that destination.
+            Choosing a new name does not reuse a checkpoint for the old one.
+          </p>
+
+          <h3 id="safe-resume">Partial files and safe resume</h3>
+          <p>
+            Downloads use a sibling file ending in <code>.havremote.part</code>.
+            Uploads use a temporary remote name when the server supports it.
+            Resume is offered only when recorded source and destination metadata
+            still matches. Otherwise, start again or choose another
+            <a href="#destination-conflicts">conflict action</a>.
+          </p>
+          <p>
+            Resuming FTP and FTPS uploads requires server support. If the server
+            does not support it, restart the upload from the beginning or ask
+            the server administrator to enable upload resume.
+          </p>
+        </section>
+
+        <section id="file-operations">
+          <h2>File operations and permissions</h2>
+          <h3>Local files</h3>
+          <ul>
+            <li>
+              <strong>New folder</strong> creates a directory in the current
+              location.
+            </li>
+            <li>
+              <strong>Edit</strong> opens one selected file with the
+              <a href="#external-editing">configured external editor</a>.
+            </li>
+            <li><strong>Rename</strong> edits the selected item's name.</li>
+            <li>
+              <strong>Delete</strong> moves selected items to your system's
+              Trash or Recycle Bin where possible. Items that cannot be moved
+              there may be permanently deleted.
+            </li>
+          </ul>
+
+          <h3>Remote files</h3>
+          <ul>
+            <li>
+              Create an empty file or a directory in the current remote
+              location.
+            </li>
+            <li>Rename files and directories.</li>
+            <li>Open a regular file for external editing.</li>
+            <li>Change the permission mode of one or more supported items.</li>
+            <li>
+              Permanently delete selected items. Remote directories are deleted
+              recursively.
+            </li>
+          </ul>
+          <p class="warning">
+            <strong>Warning:</strong> Remote deletion is permanent and cannot be
+            undone by havRemote. Read the confirmation carefully, especially for
+            directories or multiple selections.
+          </p>
+          <p>
+            With either file list focused, press
+            <a href="#shortcuts"><kbd>Delete</kbd></a> without modifier keys to
+            delete one or more selected items using the same confirmation as the
+            button. Remote items are permanently deleted. Local items go to your
+            system's Trash or Recycle Bin where possible. Otherwise they may be
+            permanently deleted. This shortcut does not delete files while you
+            are typing a path or editing a filename. <kbd>Shift</kbd>+<kbd
+              >Delete</kbd
+            >
+            does not bypass confirmation or change the local deletion behavior.
+          </p>
+
+          <h3 id="remote-permissions">Changing remote permissions</h3>
+          <p>
+            Select one or more remote files or directories and choose
+            <strong>Permissions</strong>. Set owner, group, and other
+            read/write/execute bits, optional setuid/setgid/sticky bits, or
+            enter an exact three- or four-digit octal mode such as
+            <code>0755</code>. Availability depends on the server. havRemote
+            will not change permissions on the remote root, symlinks, or special
+            files.
+          </p>
+        </section>
+
+        <section id="external-editing">
+          <h2>External editing</h2>
+          <p>
+            Open <a href="#settings-history"><strong>Settings</strong></a> to
+            choose the system default application or a custom editor. A custom
+            argument template must contain <code>{file}</code> exactly once.
+            havRemote inserts the selected file path as one literal argument
+            without using a command shell.
+          </p>
+
+          <h3>Local files</h3>
+          <p>
+            Select one local file and choose <strong>Edit</strong>. If its file
+            type is blocked when using the system-default application, select a
+            trusted custom editor to open it as data.
+          </p>
+
+          <h3>Remote files</h3>
+          <p>
+            havRemote downloads a private working copy, opens it in the editor,
+            watches for stable saves, and uploads changes through the normal
+            <a href="#queue-actions">transfer queue</a>. Before replacing the
+            server copy, it checks that the remote file has not changed since
+            you opened it. If it has changed, havRemote asks before overwriting
+            the newer revision.
+          </p>
+          <p class="note">
+            <strong>Keep havRemote running:</strong> Leave the connection and
+            tab open while editing. If monitoring, verification, disconnection,
+            or shutdown prevents a safe upload, havRemote keeps the local
+            recovery copy and reports its location.
+          </p>
+        </section>
+
+        <section id="settings-history">
+          <h2>Settings and history</h2>
+          <h3>Appearance and language</h3>
+          <p>
+            In Settings, you can choose a light or dark theme and select from
+            the available languages. Language changes apply immediately. A theme
+            change takes effect after restarting havRemote.
+          </p>
+          <p>
+            Open <strong>Help → View Help</strong> or press <kbd>F1</kbd> to
+            read the help in the selected application language. If no matching
+            help page is installed, havRemote opens the English help instead.
+          </p>
+
+          <h3 id="transfer-settings">Transfers and connections</h3>
+          <p>
+            <strong>Simultaneous transfers</strong> limits the number of file
+            transfers running across all connection tabs and takes effect after
+            a restart. The <strong>connection timeout</strong> limits how long a
+            new server connection may take. The
+            <strong>idle timeout</strong> limits how long a command may make no
+            network progress. Timeout changes apply when a tab reconnects.
+          </p>
+          <p>
+            FTP/FTPS file uploads and downloads have a separate low-speed
+            timeout: the transfer fails if measured throughput stays below 1
+            byte/sec for 30 seconds. This applies to passive and active mode,
+            including explicit and implicit FTPS. It is not a limit on total
+            transfer duration. Brief stalls are allowed. A timeout keeps partial
+            files for <a href="#safe-resume">safe resume</a> and does not
+            automatically retry. The idle-timeout setting still applies to FTP
+            command responses and SFTP operations.
+          </p>
+          <p>
+            The
+            <a href="#destination-conflicts"
+              ><strong>default conflict action</strong></a
+            >
+            can be Ask, Overwrite, Skip, Rename incoming item, or Resume when
+            safe. A change applies immediately to newly queued transfers.
+            Existing queue entries keep the policy with which they were created.
+          </p>
+          <p>
+            After saving a theme or simultaneous-transfer change, havRemote
+            offers to restart immediately. Decline to apply those changes on
+            your next launch instead. The prompt warns about unfinished
+            transfers and files open in external editors: interrupted transfers
+            return paused when recovered, and restarting stops monitoring edited
+            files, so later editor saves are no longer uploaded automatically.
+          </p>
+
+          <h3>Quick Connect history</h3>
+          <p>
+            After a successful unsaved Quick Connect, havRemote remembers up to
+            20 recent endpoints. Select the History button to reuse an endpoint
+            or clear the entire list. History stores the protocol, host, port,
+            and username only - never the password. Clearing it also removes
+            remembered directory pairs for those recent endpoints.
+          </p>
+
+          <h3>Remembered workspace</h3>
+          <p>
+            havRemote remembers <a href="#tabs">open tabs and their order</a>,
+            the selected tab, local and remote directories for saved sites and
+            recent endpoints, local and remote list sorting and column widths,
+            and the main window's size, position, and maximized state. Choose
+            <strong>Settings → Main window → Restore default size</strong>, then
+            click <strong>OK</strong> to apply and save the default dimensions.
+            <strong>Cancel</strong> leaves the window placement unchanged. When
+            a saved site is opened, its remembered directory pair is restored
+            first. Its configured initial directories are used only when no
+            remembered pair exists.
+          </p>
+
+          <h3 id="transfer-recovery">Transfer recovery</h3>
+          <p>
+            Unfinished and failed transfers are stored separately in
+            <code>queue.cson</code> (see
+            <a href="#configuration">data locations</a>). After a restart,
+            interrupted work appears paused in a recovered connection tab.
+            Select that tab, reconnect to the same site and exact endpoint, then
+            choose <strong>Retry</strong>. Completed and canceled transfers are
+            not kept as permanent history. The queue file contains paths,
+            endpoint identity, progress, errors, and safe-resume metadata, but
+            no passwords or key passphrases.
+          </p>
+          <p class="warning">
+            <strong>If the queue file cannot be loaded:</strong> havRemote
+            reports the error and leaves the file unchanged. Transfers remain
+            usable, but queue persistence is disabled for that session, so new
+            queue changes will not survive a restart. Close havRemote, back up
+            <code>queue.cson</code>, then correct it or move it aside and
+            restart to enable recovery persistence again. havRemote does not
+            reset an invalid queue automatically.
+          </p>
+        </section>
+
+        <section id="updates">
+          <h2>Updates</h2>
+          <p>
+            Select <strong>Help → Check for Updates</strong> to query the latest
+            published havRemote release that GitHub does not mark as a
+            prerelease. A manual check runs even when automatic checks are
+            disabled or the offered version was previously skipped.
+          </p>
+          <p>
+            <strong>Automatically check once per day</strong> is enabled by
+            default. At startup, havRemote checks only when no attempt has
+            completed in the past 24 hours. Choosing
+            <strong>Skip this version</strong> suppresses automatic notices only
+            for that exact version. A newer release is still shown, and a manual
+            check still shows the skipped version.
+          </p>
+          <p>
+            Release notes are displayed as plain, read-only text.
+            <strong>Download</strong> opens the download link in your default
+            browser. <strong>View release</strong> opens the release's GitHub
+            page. havRemote does not install updates or replace program files.
+          </p>
+          <p class="note">
+            <strong>Privacy:</strong> Update checks use the project's public
+            GitHub Releases API over HTTPS. No GitHub account, access token, or
+            repository secret is used. GitHub receives the ordinary connection
+            metadata of an HTTPS request, such as the public IP address.
+          </p>
+        </section>
+
+        <section id="security">
+          <h2>Security</h2>
+          <ul>
+            <li>
+              <strong>Prefer SFTP or FTPS.</strong> Plain FTP sends credentials
+              and file contents without encryption and always produces a
+              warning.
+            </li>
+            <li>
+              <strong>Verify trust prompts.</strong> Compare SFTP host-key
+              fingerprints or FTPS certificate information with a value obtained
+              through a separate trusted channel.
+            </li>
+            <li>
+              <strong>FTPS validation</strong> checks that the server
+              certificate is trusted and matches the hostname. A saved exception
+              remembers the certificate's public key for that host and port
+              only. An exception is allowed only for a currently valid
+              self-signed certificate whose sole problem is a missing trusted
+              issuer. It does not bypass expiry, detected revocation, hostname
+              mismatches, or other certificate-validation failures.
+            </li>
+            <li>
+              <strong>SFTP trust</strong> is keyed by host and port. Unknown
+              keys may be accepted once or stored permanently. A changed key is
+              blocked until you explicitly replace it.
+            </li>
+            <li>
+              <strong>Secrets</strong> such as passwords and private-key
+              passphrases are never stored in the settings file or Quick Connect
+              history. Saved secrets are kept in the operating system's
+              credential store.
+            </li>
+            <li>
+              <strong>Interactive answers</strong> such as TOTP codes are kept
+              only for the current authentication exchange and are never saved.
+            </li>
+            <li>
+              <strong>Diagnostics</strong> are sanitized before display. Still
+              review paths and server messages before sharing a screenshot or
+              log excerpt.
+            </li>
+            <li>
+              <strong>Path safety</strong> rejects paths that escape the chosen
+              destination and unsafe or conflicting filenames.
+            </li>
+          </ul>
+        </section>
+
+        <section id="shortcuts">
+          <h2>Keyboard shortcuts</h2>
+          <p>
+            Throughout this help, <kbd>Ctrl/⌘</kbd> means <kbd>Ctrl</kbd> on
+            Windows and Linux, or the Command key <kbd>⌘</kbd> on macOS. The
+            application menus also show their shortcuts.
+          </p>
+          <table>
+            <caption>
+              Application shortcuts and useful keyboard actions
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Keys</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Keys"><kbd>Ctrl/⌘</kbd>+<kbd>T</kbd></td>
+                <td data-label="Action">Create a new connection tab</td>
+              </tr>
+              <tr>
+                <td data-label="Keys"><kbd>Ctrl/⌘</kbd>+<kbd>W</kbd></td>
+                <td data-label="Action">Close the current connection tab</td>
+              </tr>
+              <tr>
+                <td data-label="Keys"><kbd>Ctrl/⌘</kbd>+<kbd>S</kbd></td>
+                <td data-label="Action">
+                  <a href="#saving-a-site">Open Site Manager</a>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Keys"><kbd>Ctrl/⌘</kbd>+<kbd>,</kbd></td>
+                <td data-label="Action">
+                  <a href="#settings-history">Open Settings</a>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Keys"><kbd>F1</kbd></td>
+                <td data-label="Action">Open this offline help</td>
+              </tr>
+              <tr>
+                <td data-label="Keys"><kbd>Ctrl/⌘</kbd>+<kbd>C</kbd></td>
+                <td data-label="Action">
+                  Copy selected transfers while the Queue, Failed, or Completed
+                  list has focus
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Keys"><kbd>Ctrl/⌘</kbd>+<kbd>Insert</kbd></td>
+                <td data-label="Action">
+                  Copy selected transfers (alternative on keyboards with an
+                  Insert key)
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Keys"><kbd>Ctrl/⌘</kbd>+<kbd>A</kbd></td>
+                <td data-label="Action">
+                  Select all entries in the focused transfer list
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Keys"><kbd>Delete</kbd></td>
+                <td data-label="Action">
+                  Delete selected items in the focused local or remote file
+                  list, with confirmation. Local items go to the system's Trash
+                  or Recycle Bin where possible and may otherwise be permanently
+                  deleted. Remote items are permanently deleted
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Keys"><kbd>Enter</kbd></td>
+                <td data-label="Action">
+                  Connect from the password field, navigate to a typed path, or
+                  activate the selected browser item
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            <kbd>Delete</kbd> means forward delete, not Backspace. On compact
+            Mac keyboards, use <kbd>Fn</kbd>+<kbd>Delete</kbd>. Depending on
+            your keyboard settings, <kbd>F1</kbd> may also require
+            <kbd>Fn</kbd>. If a shortcut is unavailable, use the corresponding
+            button or menu action.
+          </p>
+        </section>
+
+        <section id="configuration">
+          <h2>Configuration files and data locations</h2>
+          <p>
+            Settings and recovery data are stored for your user account. The
+            configuration and local application-data folders depend on your
+            operating system.
+          </p>
+          <table>
+            <caption>
+              Application files and storage locations
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Data</th>
+                <th scope="col">Location</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Data">Application settings and saved sites</td>
+                <td data-label="Location">
+                  <code>havRemote.cson</code> in havRemote's configuration
+                  folder
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Data">
+                  <a href="#transfer-recovery"
+                    >Unfinished and failed transfer recovery</a
+                  >
+                </td>
+                <td data-label="Location">
+                  <code>queue.cson</code> in the same configuration folder
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Data">SFTP trusted host keys</td>
+                <td data-label="Location">
+                  <code>known_hosts</code> in the same configuration folder
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Data">Passwords and key passphrases</td>
+                <td data-label="Location">
+                  The operating system's credential store
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Data">
+                  Remote-edit working and recovery copies
+                </td>
+                <td data-label="Location">
+                  The <code>edit</code> subfolder in havRemote's local
+                  application-data folder
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Data">Translations</td>
+                <td data-label="Location">
+                  The <code>translations</code> folder installed with havRemote
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            Configuration error messages include the affected file's path. When
+            havRemote keeps a remote-edit recovery copy, its message also shows
+            where that file was saved.
+          </p>
+          <p>
+            Close havRemote before editing its settings file by hand. Your
+            comments are preserved when havRemote saves changes.
+          </p>
+          <p class="warning">
+            <strong
+              >Do not discard a reported configuration error blindly.</strong
+            >
+            havRemote does not overwrite malformed or unsupported configuration.
+            Correct or preserve and remove the file, then restart the
+            application.
+          </p>
+        </section>
+
+        <section id="changelog">
+          <h2>Changelog</h2>
+          <h3>Version 0.1.0 - <time datetime="2026-09-17">2026-09-17</time></h3>
+          <ul>
+            <li>First Release</li>
+          </ul>
+        </section>
+
+        <section id="troubleshooting">
+          <h2>Troubleshooting</h2>
+          <details>
+            <summary>I cannot connect</summary>
+            <ul>
+              <li>
+                Check the protocol, host, and port. The Host field must not
+                contain <code>ftp://</code>, <code>sftp://</code>, a path, or a
+                port.
+              </li>
+              <li>
+                Confirm that the server accepts the selected
+                <a href="#connections">authentication method</a> and that its
+                firewall allows the connection.
+              </li>
+              <li>
+                An FTP/FTPS server may disconnect an idle session while the last
+                directory listing remains visible. havRemote may reconnect
+                automatically when you next use the connection. A successful
+                reconnection adds <code>Reconnected to the FTP server</code> to
+                the message log. If the operation fails, havRemote reports the
+                error. havRemote does not send periodic commands just to keep an
+                idle session open.
+              </li>
+              <li>
+                An FTP response of <code>530</code> means authentication was
+                rejected or the session is no longer logged in. This can also
+                happen when a file operation needs a fresh connection. Check
+                your credentials and the server's access rules, then reconnect
+                before retrying.
+              </li>
+              <li>
+                For passive FTP/FTPS, confirm that the server's passive data
+                ports are reachable through its firewall and the network. These
+                connections are negotiated using EPSV or PASV.
+              </li>
+              <li>
+                For <a href="#connections">active FTP/FTPS</a>, allow incoming
+                data connections through your firewall and confirm that the
+                server can reach your computer at the selected local address.
+                Leave
+                <strong>Active mode local address (optional)</strong> blank
+                unless you need another address already assigned to this
+                computer. If the server cannot reach any local address directly,
+                use passive mode.
+              </li>
+              <li>
+                Test active FTP/FTPS by listing a directory, downloading a file,
+                and uploading a file. These operations use the data connection,
+                but renaming does not. An FTP response of <code>550</code> when
+                renaming points to a file-operation problem, such as the path or
+                access permissions, rather than an active-mode data-connection
+                failure.
+              </li>
+              <li>
+                Read the complete error message in the log, including its
+                explanation, FTP response, and client error code (shown as
+                <code>CURLcode</code>). Server replies and client error codes
+                are different: FTP response <code>550</code> is not the same as
+                <code>CURLcode 55</code>. The most recent FTP response alone may
+                not explain the failure. Include the complete message when
+                reporting a problem, but review names, paths, and server
+                messages before sharing it.
+              </li>
+              <li>
+                A <strong>DEBUG</strong> message does not necessarily mean an
+                action failed. It may describe a command the server did not
+                support before havRemote used an alternative successfully.
+                Failed actions are reported separately with an explanation of
+                what went wrong.
+              </li>
+              <li>
+                For active-mode problems, Debug messages also show the local
+                address and listening port when available, plus details of any
+                connection-setup failure. These can help you or the server
+                administrator check reachability and firewall rules.
+              </li>
+            </ul>
+          </details>
+          <details>
+            <summary>A remote SFTP operation fails</summary>
+            <p>
+              When available, the diagnostic includes the server's status name
+              and number, such as
+              <code>Permission denied (SFTP status 3)</code> or
+              <code>No such file (SFTP status 2)</code>. These describe a
+              file-operation failure, not a rejected password. A generic
+              <code>Failure (SFTP status 4)</code> does not identify the cause.
+              Check the path, permissions, available space, and the server's
+              logs or ask its administrator. Authentication and connection
+              failures are reported separately.
+            </p>
+          </details>
+          <details>
+            <summary>A certificate or SFTP host key changed</summary>
+            <p>
+              Do not accept the <a href="#security">new identity</a> until the
+              server administrator confirms it through a separate trusted
+              channel. A changed identity can be caused by legitimate server
+              maintenance, but it can also indicate interception or an
+              unexpected endpoint.
+            </p>
+          </details>
+          <details>
+            <summary>
+              The remote Owner/Group or Permissions field is empty
+            </summary>
+            <p>
+              The server or listing format did not provide that metadata.
+              Refresh the directory after the connection is fully established.
+              If the values remain empty, this does not necessarily indicate an
+              error.
+            </p>
+          </details>
+          <details>
+            <summary>Pause, Cancel, or Retry is disabled</summary>
+            <p>
+              Select a transfer in the appropriate
+              <a href="#queue-actions">Queue, Failed, or Completed view</a>. An
+              action is enabled only for states in which it can be performed
+              safely. For <a href="#transfer-recovery">restored work</a>, select
+              its recovered connection tab and reconnect to the original site
+              and exact endpoint before using <strong>Retry</strong>.
+            </p>
+          </details>
+          <details>
+            <summary>Resume is not offered</summary>
+            <p>
+              The source, destination, or partial-file metadata no longer
+              matches the recorded transfer. See
+              <a href="#safe-resume">Partial files and safe resume</a> for the
+              checks required. Use overwrite, rename, or skip instead of
+              appending to an unverified file.
+            </p>
+          </details>
+          <details>
+            <summary>An edited remote file was not uploaded</summary>
+            <p>
+              Keep havRemote, its connection tab, and the server connection open
+              while editing. Check the
+              <a href="#queue-actions">transfer queue</a> and message log. If
+              the upload appears in <strong>Failed</strong>, resolve the
+              problem, reconnect to the original site and endpoint if necessary,
+              then select the entry and choose <strong>Retry</strong>. If no
+              retryable entry remains, use the reported recovery copy and upload
+              it manually (see <a href="#configuration">data locations</a>).
+            </p>
+          </details>
+          <details>
+            <summary>The theme did not change immediately</summary>
+            <p>
+              <a href="#settings-history">Theme changes</a> require an
+              application restart. Language and external-editor changes apply
+              immediately.
+            </p>
+          </details>
+          <details>
+            <summary>Checking for updates fails</summary>
+            <p>
+              Confirm that HTTPS access to GitHub is available and not blocked
+              by a firewall or proxy, then try a
+              <a href="#updates">manual check</a> again. Failures during an
+              automatic check are written to the message log without opening a
+              dialog. havRemote does not require a GitHub sign-in or access
+              token.
+            </p>
+          </details>
+          <details>
+            <summary>
+              The application reports an invalid configuration at startup
+            </summary>
+            <p>
+              Note the filename, line, and column in the error. Close havRemote,
+              make a backup, correct or remove the
+              <a href="#configuration">invalid file</a>, and restart.
+            </p>
+          </details>
+        </section>
+      </main>
+    </div>
+
+    <a
+      class="back-to-top"
+      href="#top"
+      aria-label="Back to top"
+      title="Back to top">
+      <span aria-hidden="true">↑</span>
+    </a>
+
+    <footer>
+      <div>
+        Copyright © 2026 René Nicolaus · <a href="../LICENSE.txt">MIT License</a>
+      </div>
+      <div>
+        <a href="https://havoc.de">Website</a> ·
+        <a href="https://github.com/Havoc7891/havRemote">Source Code</a> ·
+        <a href="mailto:havremote@havoc.de" title="havremote@havoc.de">Email</a>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,146 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CMake: configure havRemote (Debug)",
+      "type": "process",
+      "command": "cmake",
+      "args": ["--preset", "mingw-debug-local"],
+      "linux": {
+        "args": ["--preset", "linux-debug"]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: build havRemote (Debug)",
+      "type": "process",
+      "command": "cmake",
+      "args": [
+        "--build",
+        "--preset",
+        "mingw-debug-local",
+        "--target",
+        "havRemote"
+      ],
+      "linux": {
+        "args": ["--build", "--preset", "linux-debug", "--target", "havRemote"]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "dependsOrder": "sequence",
+      "dependsOn": "CMake: configure havRemote (Debug)",
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "CMake: build all (Debug)",
+      "type": "process",
+      "command": "cmake",
+      "args": ["--build", "--preset", "mingw-debug-local"],
+      "linux": {
+        "args": ["--build", "--preset", "linux-debug"]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "dependsOrder": "sequence",
+      "dependsOn": "CMake: configure havRemote (Debug)",
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "CTest: run all (Debug)",
+      "type": "process",
+      "command": "ctest",
+      "args": ["--preset", "mingw-debug-local"],
+      "linux": {
+        "args": ["--preset", "linux-debug"]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "dependsOrder": "sequence",
+      "dependsOn": "CMake: build all (Debug)",
+      "problemMatcher": [],
+      "group": "test"
+    },
+    {
+      "label": "CMake: configure havRemote (Release)",
+      "type": "process",
+      "command": "cmake",
+      "args": ["--preset", "mingw-release-local"],
+      "linux": {
+        "args": ["--preset", "linux-release"]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: build havRemote (Release)",
+      "type": "process",
+      "command": "cmake",
+      "args": [
+        "--build",
+        "--preset",
+        "mingw-release-local",
+        "--target",
+        "havRemote"
+      ],
+      "linux": {
+        "args": [
+          "--build",
+          "--preset",
+          "linux-release",
+          "--target",
+          "havRemote"
+        ]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "dependsOrder": "sequence",
+      "dependsOn": "CMake: configure havRemote (Release)",
+      "problemMatcher": ["$gcc"],
+      "group": "build"
+    },
+    {
+      "label": "CMake: build all (Release)",
+      "type": "process",
+      "command": "cmake",
+      "args": ["--build", "--preset", "mingw-release-local"],
+      "linux": {
+        "args": ["--build", "--preset", "linux-release"]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "dependsOrder": "sequence",
+      "dependsOn": "CMake: configure havRemote (Release)",
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "CTest: run all (Release)",
+      "type": "process",
+      "command": "ctest",
+      "args": ["--preset", "mingw-release-local"],
+      "linux": {
+        "args": ["--preset", "linux-release"]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "dependsOrder": "sequence",
+      "dependsOn": "CMake: build all (Release)",
+      "problemMatcher": [],
+      "group": "test"
+    }
+  ]
+}

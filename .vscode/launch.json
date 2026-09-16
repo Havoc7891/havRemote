@@ -1,0 +1,158 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "havRemote: Debug with MinGW GDB",
+      "linux": {
+        "presentation": { "hidden": true }
+      },
+      "osx": {
+        "presentation": { "hidden": true }
+      },
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/mingw-debug/havRemote-debug.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "avoidWindowsConsoleRedirection": true,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable GDB pretty-printing",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "CMake: build havRemote (Debug)"
+    },
+    {
+      "name": "havRemote: Simulate update check",
+      "linux": {
+        "presentation": { "hidden": true }
+      },
+      "osx": {
+        "presentation": { "hidden": true }
+      },
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/mingw-debug/havRemote-debug.exe",
+      "args": ["--simulate-update=${input:updateScenario}"],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "avoidWindowsConsoleRedirection": true,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable GDB pretty-printing",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "CMake: build havRemote (Debug)"
+    },
+    {
+      "name": "havRemote: Attach MinGW GDB",
+      "linux": {
+        "presentation": { "hidden": true }
+      },
+      "osx": {
+        "presentation": { "hidden": true }
+      },
+      "type": "cppdbg",
+      "request": "attach",
+      "program": "${workspaceFolder}/build/mingw-debug/havRemote-debug.exe",
+      "processId": "${command:pickProcess}",
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable GDB pretty-printing",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
+      "name": "havRemote: Debug with Linux GDB",
+      "presentation": { "hidden": true },
+      "linux": {
+        "presentation": { "hidden": false }
+      },
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/linux-debug/havRemote-debug",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable GDB pretty-printing",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "CMake: build havRemote (Debug)"
+    },
+    {
+      "name": "havRemote: Simulate update check (Linux)",
+      "presentation": { "hidden": true },
+      "linux": {
+        "presentation": { "hidden": false }
+      },
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/linux-debug/havRemote-debug",
+      "args": ["--simulate-update=${input:updateScenario}"],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable GDB pretty-printing",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "CMake: build havRemote (Debug)"
+    },
+    {
+      "name": "havRemote: Attach Linux GDB",
+      "presentation": { "hidden": true },
+      "linux": {
+        "presentation": { "hidden": false }
+      },
+      "type": "cppdbg",
+      "request": "attach",
+      "program": "${workspaceFolder}/build/linux-debug/havRemote-debug",
+      "processId": "${command:pickProcess}",
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable GDB pretty-printing",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "id": "updateScenario",
+      "type": "pickString",
+      "description": "Update-check simulation scenario",
+      "options": [
+        "available",
+        "up-to-date",
+        "no-release",
+        "network-error",
+        "server-error"
+      ],
+      "default": "available"
+    }
+  ]
+}
